@@ -1,0 +1,201 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'css/cadastro.css' %}">
+    <title>Cadastro</title>
+</head>
+<body>
+
+    <header>
+
+            <img src="/media/copy2_of_topo_ifpi_angical.png" alt="">
+
+
+            <h1>Instituto Federal do Piauí - IFPI</h1>
+
+    </header>
+    {% if user.is_authenticated %}
+    <form action="{% url 'participante_save' %}" method="POST">
+        {% csrf_token %}
+        <!-- dados usuario -->
+
+        <fieldset>
+
+        <legend class="p">Dados Pessoais - Campos com * são obrigatórios</legend>
+
+        <div class="linhas">
+            <div class="campo">
+                <label for="cpf">CPF*</label>
+                 {{ form.cpf }}
+            </div>
+            <div class="campo">
+                <label for="nome">Nome Completo*</label>
+                {{ form.nome }}
+            </div>
+        </div>
+
+        <div class="linhas">
+            <div class="campo">
+                <label for="nome">Sexo*</label>
+                {{ form.sexo }}
+                <p>informar sexo descrito no documento oficial de identificação.</p>
+            </div>
+            <div class="campo">
+                <label for="nome">Filiação - Nome da Mãe*</label>
+                {{ form.nome_mae }}
+                <p>informar nome do(a) responsável legal.</p>
+            </div>
+        </div>
+
+        <div class="linhas">
+            <div class="campo">
+                <label for="nome">Filiação - Outro Responsável</label>
+                {{ form.responsavel }}
+                <p>informar nome do(a) responsável legal.</p>
+            </div>
+            <div class="campo">
+                <label for="nome">Data de Nascimento*</label>
+                {{ form.data_nascimento }}
+            </div>
+        </div>
+
+        <div class="linhas">
+            <div class="campo">
+                <label for="nome">Nacionalidade*</label>
+                {{ form.nacionalidade }}
+            </div>
+            <div class="campo">
+                <label for="email">Estado</label>
+                {{ form.estado_nascimento }}
+            </div>
+        </div>
+
+        <div class="linhas">
+            <div class="campo">
+                <label for="nome">Município de Nascimento</label>
+                {{ form.municipio_nascimento }}
+            </div>
+            <div class="campo">
+                <label for="nome">Identidade do candidato*</label>
+                {{ form.identidade_candidato }}
+            </div>
+        </div>
+
+        <div class="linhas">
+            <div class="campo">
+                    <label for="nome">Data de Emissão Identidade*</label>
+                    {{ form.data_identidade }}
+            </div>
+            <div class="campo">
+                <label for="nome">Órgão Emissor*</label>
+                {{ form.orgao_emissor }}
+            </div>
+        </div>
+
+        <div class="linhas">
+            <div class="campo">
+                <label for="email">UF da Identidade*</label>
+                {{ form.uf_identidade }}
+            </div>
+            <div class="campo">
+                <label for="nome">Município da Identidade</label>
+               {{ form.municipio_identidade }}
+            </div>
+        </div>
+        <div class="campoPais">
+            <label for="nome">País de Origem</label>
+            {{ form.pais_origem }}
+            <p>Apenas preencha este campo caso não tenha nascido no Brasil.</p>
+        </div>
+    </fieldset>
+
+        <!-- endereço -->
+    <fieldset>
+
+                <legend class="p">Endereço do Candidato</legend>
+
+        <div class="linhas">
+            <div class="campo">
+                <label for="nome">Logadouro*</label>
+                {{ form.logradouro }}
+                <p>Nome da rua.</p>
+            </div>
+            <div class="campo">
+                <label for="nome">Complemento</label>
+                {{ form.complemento }}
+            </div>
+        </div>
+
+        <div class="linhas">
+                <div class="campo">
+                    <label for="nome">Bairro*</label>
+                    {{ form.bairro }}
+                </div>
+            <div class="campo">
+                <label for="email">Estado*</label>
+                {{ form.estado }}
+            </div>
+        </div>
+
+        <div class="linhas">
+                <div class="campo">
+                    <label for="nome">CEP*</label>
+                    {{ form.cep }}
+                </div>
+            <div class="campo">
+                <label for="email">ZONA*</label>
+                {{ form.zona }}
+            </div>
+        </div>
+
+        <div class="linhas">
+            <div class="campo">
+                <label for="nome">Cidade deste endereço*</label>
+                {{ form.cidade_endereco }}
+            </div>
+
+        </div>
+
+    </fieldset>
+
+    <fieldset>
+        <!-- contato -->
+
+            <legend class="p">Contato do Candidato</legend>
+
+
+        <div class="linhas">
+            <div class="campo">
+                <label for="nome">E-Mail*</label>
+                {{ form.email }}
+            </div>
+            <div class="campo">
+                <label for="nome">Telefone Residencial</label>
+                {{ form.telefone_residencial }}
+            </div>
+        </div>
+
+        <div class="campoPais">
+            <label for="nome">Telefone Celular*</label>
+            {{ form.telefone_celular }}
+        </div>
+     </fieldset>
+
+        <!-- botão -->
+        <div class="btn">
+            <button class="botao submit" type="submit" name="submit">Enviar</button>
+        </div>
+    </form>
+    {% endif %}
+    <footer>
+        <div class="footer">
+            <div class="linhaf"></div>
+            <p class="p">Instituto Federal de Educação, Ciência e Tecnologia do Piauí (IFPI), Reitoria, Angical (PI)</p>
+        </div>
+    </footer>
+</body>
+</html>

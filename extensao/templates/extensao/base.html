@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css" />
+	 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+    <title>Sistema de extensão</title>
+</head>
+<body style="background-color:#fafafa;">
+
+
+
+	<nav>
+        <div class="nav-wrapper green darken-3">
+
+            <a href="#" class="brand-logo"> <h5 class="siex" style="margin-top:20px;"> SIEX - Sistema de Extensão</h5></a>
+            <a href="#" data-activates="menu-mobile" class="button-collapse">
+                <i class="material-icons">menu</i>
+            </a>
+
+            <ul class="right hide-on-med-and-down green darken-4">
+                <li><a href="{% url 'home' %}">Início</a></li>
+
+				{% if user.is_authenticated %}
+
+                <li class="green darken-4" ><a href="{% url 'participante_detalhes' user.id %}"> Dados Pessoais</a></li>
+                <li class="green darken-4"><a href="{% url 'minhas_inscricoes' %}">Minhas incrições</a></li>
+                <li class="green darken-4"><a href="{% url 'alterar_senha' %}">Alterar Senha</a></li>
+                <li class="green darken-4"><a href="{% url 'logout' %}">Sair</a></li>
+
+                {% else %}
+
+                    <li><a href="{% url 'signup' %}">Cadastre-se</a></li>
+                    <li><a href="{% url 'login' %}">Entrar</a></li>
+				{% endif %}
+            </ul>
+
+
+
+            <ul class="side-nav green accent-4" id="menu-mobile">
+                <li><a href="{% url 'home' %}">Início</a></li>
+
+				{% if user.is_authenticated %}
+                    <li><a href="{% url 'alterar_senha' %}">Alterar senha</a></li>
+                    <li><a href="{% url 'participante_detalhes' user.id %}">  Dados Pessoais</a></li>
+                    <li><a href="{% url 'minhas_inscricoes' %}">Minhas incrições</a></li>
+                    <li><a href="{% url 'logout' %}">Sair</a></li>
+				{% else %}
+                    <li><a href="{% url 'signup' %}">Cadastre-se</a></li>
+                    <li><a href="{% url 'login' %}">Entrar</a></li>
+				{% endif %}
+
+            </ul>
+        </div>
+    </nav>
+        <h5 class="bemvindo"> {% if user.is_authenticated %}
+	         Bem Vindo ao Site, {{ user.username }}
+        {% else %}
+             Bem Vindo ao Site, Visitante
+        {% endif %}
+    </h5>
+
+
+    <div class="row">
+        <div class="col s5">
+            <img  class="right" alt="django" src="/media/copy2_of_topo_ifpi_angical.png">
+        </div>
+        <div class="col s7">
+            <h4 class="title" style="font-family: Arial, Helvetica, sans-serif;">Instituto Federal do Piauí</h4>
+            <p class="paragrafo" style="font-size: 1.2em;">Ministério da Educação</p>
+        </div>
+
+    </div>
+    <div  class="green darken-4 " style="height:1px;"> </div>
+
+
+ {% block context %}
+ {% endblock %}
+
+
+	   <footer class="page-footer green darken-3" style="margin-top:10px; margin-bottom:-20px;">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Campus Angical</h5>
+                    <p class="white-text">Coordenação de Tecnologia da Informação.</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">VISITE</h5>
+                    <ul>
+                        <li><a class="white-text" href="#!">IFPI</a></li>
+                        <li><a class="white-text" href="#!">SARI-Angical</a></li>
+                        <li><a class="white-text" href="#!">IFPI-Angical</a></li>
+                        <li><a class="white-text" href="#!">Biblioteca</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container center white-text">
+                © 2019 Todos os direitos reservados ao IFPI - Campus Angical
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+    <script>
+        $(function () {
+            $(".button-collapse").sideNav();
+            $('.dropdown-trigger').dropdown();
+        });
+    </script>
+
+</body>
+</html>
+

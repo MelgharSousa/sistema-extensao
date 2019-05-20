@@ -1,0 +1,9 @@
+{% extends "extensao/base.html" %}
+{% block context %}
+    {% for inscricao in inscricoes %}
+         Curso:{{ inscricao.curso_extensao }}
+         Situação:
+        <li><a href="{% url 'comprovante_inscricao' inscricao.id  %}">Comprovante</a></li>
+    {% endfor %}
+{% endblock %}
+

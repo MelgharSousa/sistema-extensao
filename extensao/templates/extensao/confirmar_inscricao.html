@@ -1,0 +1,33 @@
+{% extends "extensao/base.html" %}
+
+{% block context %}
+
+
+
+            <h4 class="center">CONFIRMAR INSCRIÇÃO</h4>
+
+
+<div class="center">
+        {{curso.nome_curso}}<br/>
+        {{participante.nome}}<br/>
+        {{participante.cpf}}<br/>
+        {{curso.periodo_execucao}}<br/>
+        {{curso.carga_horario}}<br/>
+
+
+</div>
+ <h6 class="center">Concordo que o respectivo curso será ofertado havendo formação de turmas </h6>
+        </span>
+         <div class="switch center">
+            <label>
+
+                <input type="checkbox">
+                <span class="lever"></span>
+              Concordar com os termos
+            </label>
+         </div>
+<div class="center" style="margin-top:10px;">
+ <a href="{% url 'inscricao_save' curso.id %}" class="  waves-effect waves-light btn green accent-4 "
+                        style="margin-left:10px;"><i class="material-icons left">description</i>Confirmar inscrição</a>
+</div>
+{% endblock %}

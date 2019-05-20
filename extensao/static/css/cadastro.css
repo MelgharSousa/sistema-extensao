@@ -1,0 +1,331 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.linhas{
+    display: flex;
+    flex-direction: row;
+    padding-left:36px;
+    padding-top:10px;
+
+}
+
+form{
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+
+input, select, button {
+    font-family: sans-serif;
+    font-size: 1em;
+}
+
+
+.campo {
+    margin-bottom: 1em;
+    width: 50%;
+}
+
+.campoPais{
+    margin-left:34px;
+    margin-bottom: 1em;
+    width: 48%;
+}
+
+.campoPais label{
+    margin-left: 0px;
+    margin-bottom: 0.2em;
+    color: rgb(87, 87, 87);
+    display: block;
+    margin-bottom: 0.2em;
+    color: rgb(87, 87, 87);
+}
+
+.campoCidade{
+    margin-left:0px;
+    margin-bottom: 1em;
+    width: 50%;
+    margin-bottom: 0.2em;
+    color: rgb(87, 87, 87);
+}
+
+.campotelefone{
+    margin-left:36px;
+    margin-bottom: 1em;
+    width: 48%;
+    margin-bottom: 0.2em;
+    color: rgb(87, 87, 87);
+}
+
+.campo label {
+    margin-bottom: 0.2em;
+    color: rgb(87, 87, 87);
+    display: block;
+}
+
+
+fieldset{
+    padding-right:50px;
+    padding-left:50px;
+}
+
+
+.campo select option {
+    padding-right: 1em;
+}
+
+
+.campo input:focus, .campo select:focus, .campo textarea:focus {
+    background: rgb(255, 255, 255);
+}
+
+
+input{
+    width: 90%;
+    border-color: rgba(8, 197, 8, 0.548);
+    height: 25px;
+    border-radius: 5px;
+
+}
+
+p{
+    font-size: 10pt;
+}
+
+
+footer{
+    text-align: center;
+    font-size: 0.8em;
+    background-color: rgba(14, 110, 27, 0.89);
+    padding-bottom: 5px;
+    height: 10%;
+}
+
+.linhaf{
+    width: 100%;
+    height: 1px;
+    background-color: rgb(116, 116, 116);
+
+}
+
+
+.linha{
+    width: 90%;
+    height: 1px;
+    background-color: rgb(116, 116, 116);
+}
+
+
+.espaco_linha{
+    padding-bottom: 5px;
+    padding-left:10%;
+}
+
+
+.btn{
+    display: flex;
+    flex-direction: row-reverse;
+    padding-right: 10%;
+    padding-top:15px;
+
+}
+
+
+select{
+    width: 90%;
+    height: 25px;
+    border-color: rgba(8, 197, 8, 0.548);
+    border-radius: 5px;
+}
+
+
+legend{
+    font-size: 1.0em;
+    font-family: sans-serif;
+    padding: 15px 15px;
+}
+
+
+label{
+    font-size: 0.9em;
+    font-family: sans-serif;
+}
+
+
+.botao {
+    font-size: 1.5em;
+    background: rgb(11, 102, 16);
+    border: 0;
+    margin-bottom: 1em;
+    color: #FFF;
+    padding: 0.2em 0.6em;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    border-radius: 5px;
+}
+
+
+.caixab{
+    display: flex;
+    flex-direction: row-reverse;
+
+}
+
+
+.botao:hover {
+    background: rgb(29, 129, 34);
+    box-shadow: inset 2px 2px 2px rgba(0,0,0,0.2);
+    text-shadow: none;
+}
+
+
+.botao, select, label.checkbox {
+    cursor: pointer;
+}
+
+
+header{
+    display: flex;
+    flex-direction: row;
+
+}
+
+
+header h1{
+    padding-top: 50px;
+    padding-left: 50px;
+    font-size: 2.6em;
+    margin-left: 0px;
+
+}
+
+header img{
+    width: 165px;
+    height: 140px;
+    padding: 10px 10px;
+    margin-left: 218px;
+}
+
+
+@media screen and (max-width: 480px) {
+    header {
+      width: 100%;
+      margin-top: 0;
+
+    }
+
+    .p{
+        text-align: center;
+        font-size: 1.1em;
+        padding-right: 10%;
+        padding-left: 5%;
+    }
+
+    header{
+        width: 100%;
+    }
+
+    header h1{
+        font-size: 1.2em;
+        padding-top: 40px;
+        padding-left: 0px;
+        padding-right: 10%;
+        text-align: center;
+        margin-left: -18px;
+    }
+
+    header img{
+        margin-left: 1px;
+        height: 110px;
+    }
+
+
+    label{
+        font-size: 1.1;
+        padding-right: 10%;
+    }
+
+    .linhas{
+        display: flex;
+        flex-direction: column;
+        padding-left: 10px;
+        margin-left:0px;
+
+    }
+    .campo {
+        margin-bottom: 1em;
+        width: 80%;
+        margin-left:10px;
+    }
+
+    fieldset{
+       padding-left:10px;
+    }
+
+    input{
+        width: 120%;
+
+    }
+
+    select {
+        width: 122%;
+        height: 25px;
+        border-color: rgba(8, 197, 8, 0.548);
+        border-radius: 5px;
+    }
+
+    .campo {
+        margin-bottom: 1em;
+        width: 85%;
+    }
+
+    .campoPais {
+        width: 81%;
+        margin-left: 20px;
+    }
+
+}
+
+@media screen and (min-width: 480px) and (max-width: 960px) {
+    .linhas{
+        display: flex;
+        flex-direction: column;
+
+    }
+    .campo {
+        margin-bottom: 1em;
+        width: 100%;
+    }
+
+
+    header h1{
+        font-size: 1.3em;
+        padding-top: 40px;
+        padding-left: 0;
+        padding-right: 10%;
+        text-align: center;
+        margin-left: 0px;
+    }
+
+   header img{
+        padding: 10px 0 0 0;
+        margin-left:137px;
+    }
+
+    .p{
+        font-family: sans-serif;
+        padding-top: 20px;
+        padding-bottom: 5px;
+        font-size: 1em;
+        padding-left: 5%;
+        margin-left:0px;
+
+    }
+    .campoPais {
+        margin-left: 34px;
+        margin-bottom: 1em;
+        width: 93.5%;
+    }
+}

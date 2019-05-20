@@ -1,0 +1,144 @@
+{% extends "extensao/base.html" %}
+{% block context %}
+
+    {% if user.is_authenticated %}
+<div class="row" style="margin-top:10px">
+   <table class=" highlight striped col s10 offset-s1">
+            <tbody>
+                <tr>
+                    <td>CPF:</td>
+
+                    <td>{{ participante.cpf }}</td>
+                </tr>
+                <tr>
+                    <td>Nome:</td>
+
+                    <td>{{ participante.nome }}</td>
+                </tr>
+                <tr>
+                    <td>Sexo:</td>
+
+                    <td>{{ participante.sexo }}</td>
+                </tr>
+                <tr>
+                    <td>Nome da Mãe:</td>
+
+                    <td>{{ participante.nome_mae }}</td>
+                </tr>
+                <tr>
+                    <td>Filiação - Outro Responsável:</td>
+
+                    <td>{{ participante.responsavel }}</td>
+                </tr>
+                <tr>
+                    <td>Data de Nascimento:</td>
+
+                    <td>{{ participante.data_nascimento }}</td>
+                </tr>
+                <tr>
+                    <td>Nacionalidade:</td>
+
+                    <td>{{ participante.nacionalidade }}</td>
+                </tr>
+                <tr>
+                    <td>Estado:</td>
+
+                    <td>{{ participante.estado_nascimento }}</td>
+                </tr>
+                <tr>
+                    <td>Município de Nascimento:</td>
+
+                    <td>{{ participante.municipio_nascimento }}</td>
+                </tr>
+                <tr>
+                    <td>Identidade do candidato</td>
+
+                    <td>{{ participante.identidade_candidato }}</td>
+                </tr>
+                <tr>
+                    <td>Data de Emissão Identidade:</td>
+
+                    <td>{{ participante.data_identidade }}</td>
+                </tr>
+
+                <tr>
+                    <td>Órgão Emissor:</td>
+
+                    <td>{{ participante.orgao_emissor }}</td>
+                </tr>
+                <tr>
+                    <td>UF da Identidade:</td>
+
+                    <td>{{ participante.uf_identidade }}</td>
+                </tr>
+                <tr>
+                    <td>Município da Identidade:</td>
+
+                    <td>{{ participante.municipio_identidade }}</td>
+                </tr>
+                <tr>
+                    <td>País de Origem:</td>
+
+                    <td>{{ participante.pais_origem }}</td>
+                </tr>
+                <tr>
+                    <td>Logadouro:</td>
+
+                    <td>{{ participante.logradouro }}</td>
+                </tr>
+                <tr>
+                    <td>Complemento:</td>
+
+                    <td>{{ participante.complemento }}</td>
+                </tr>
+                <tr>
+                    <td>Bairro:</td>
+
+                    <td>{{ participante.bairro }}</td>
+                </tr>
+                <tr>
+                    <td>Estado:</td>
+
+                    <td>{{ participante.estado }}</td>
+                </tr>
+                <tr>
+                    <td>Cidade deste endereço:</td>
+
+                    <td>{{ participante.cidade_endereco }}</td>
+                </tr>
+                <tr>
+                    <td>CEP:</td>
+
+                    <td>{{ participante.cep }}</td>
+                </tr>
+                 <tr>
+                    <td>ZONA:</td>
+
+                    <td>{{ participante.zona }}</td>
+                </tr>
+                 <tr>
+                    <td>E-Mail:</td>
+
+                    <td>{{ participante.email }}</td>
+                </tr>
+                 <tr>
+                    <td>Telefone Residencial:</td>
+
+                    <td>{{ participante.telefone_residencial }}</td>
+                </tr>
+                 <tr>
+                    <td>Telefone Celular:</td>
+
+                    <td>{{ participante.telefone_celular }}</td>
+                </tr>
+            </tbody>
+        </table>
+</div>
+            <!-- botão -->
+        <div class="card-action center">
+            <a href="{% url 'editar' user.id %}" class="waves-effect waves-light btn green accent-4 modal-trigger" href="#modal1"
+                style="margin-top:10px"><i class="material-icons left">description</i>Editar Dados</a>
+        </div>
+
+    {% endif %}
+{% endblock %}

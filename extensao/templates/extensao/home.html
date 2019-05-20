@@ -1,0 +1,43 @@
+{% extends "extensao/base.html" %}
+{% block context %}
+
+
+
+    {% if messages %}
+                 <div class="center green lighten-4 hoverable ">
+            {% for message in messages %}
+                    <p>Cadastro concluído com sucesso!</p>
+                    <p style="color:bold;" class="{{ message.tags }}">{{ message }}</p>
+            {% endfor %}
+                 </div>
+    {% endif %}
+
+  <div class="row" style="margin-top:6px;">
+            {% for curso in cursos %}
+        <div class="col s12 m3 ">
+
+            <div class="card hoverable">
+                <div class="card-image responsive-img">
+                    <img   src="{{ curso.foto_curso.url }}">
+                </div>
+                <div class="card-content" style="height: 220px;" >
+                    <p> Curso: {{ curso.nome_curso }}</p>
+                    <p>Data Início: {{ curso.data_inicio  }}</p>
+                    <p>Data Final: {{ curso.data_final }}</p>
+                    <p>Carga Horária: {{ curso.carga_horaria}} hrs</p>
+                </div>
+
+                <div class="card-action center">
+                    <a class="waves-effect waves-light btn #1b5e20 green darken-4" href="{% url 'detalhes_curso' curso.id %}"><i
+                            class="material-icons left"></i>Detalhes</a>
+                </div>
+            </div>
+
+        </div>
+            {% endfor %}
+    </div>
+
+
+
+
+{% endblock %}

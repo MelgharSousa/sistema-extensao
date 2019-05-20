@@ -1,0 +1,43 @@
+{% extends "extensao/base.html" %}
+
+{% block context %}
+
+
+<div class="row">
+            {% if  form.errors %}
+
+                <div class="center red lighten-4 hoverable ">
+                    {{ form.old_password.errors }}
+                    {{ form.new_password2.errors }}
+                </div>
+
+            {% endif %}
+
+        <form class="col s8 offset-s2" action="" method="POST" >
+			{% csrf_token %}
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">account_circle</i>
+                    {{ form.old_password }}
+                    <label for="password">Senha Antiga</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">vpn_key</i>
+                    {{ form.new_password1 }}
+                    <label for="password">Nova Senha</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">check</i>
+                    {{ form.new_password2 }}
+                    <label for="password">Confirmar Nova Senha</label>
+                </div>
+            </div>
+			<button class="waves-effect waves-light btn green accent-4" style="margin-left:11px; type="submit">Alterar minha senha</button>
+        </form>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "extensao/base.html" %}
+
+{% block context %}
+
+
+<div class="row">
+        <form class="col s8 offset-s2" action="" method="POST" >
+			{% csrf_token %}
+            <div class="img center">
+                <img src="/media/copy2_of_topo_ifpi_angical.png">
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">account_circle</i>
+                    {{ form.email }}
+                    <label for="email">Email</label>
+                </div>
+            </div>
+
+			<button class="waves-effect waves-light btn green accent-4" style="margin-left:11px; type="submit">Alterar minha senha</button>
+        </form>
+</div>
+{% endblock %}

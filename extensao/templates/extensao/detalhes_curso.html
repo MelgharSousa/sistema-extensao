@@ -1,0 +1,121 @@
+{% extends "extensao/base.html" %}
+
+{% block context %}
+
+{% if messages %}
+             <div class="center red lighten-4 hoverable ">
+        {% for message in messages %}
+                 <p style="color:bold;" class="{{ message.tags }}">
+                  <a href="{% url 'participante' %} " style="color:black; text-decoration: underline;}">
+                      {{ message }}</a></p>
+        {% endfor %}
+             </div>
+{% endif %}
+
+<div class="row" style="margin-top:10px">
+        <table class=" highlight striped col s10 offset-s1">
+            <tbody>
+                <tr>
+                    <td>Nome do Curso:</td>
+
+                    <td>{{ curso.nome_curso }}</td>
+                </tr>
+                <tr>
+                    <td>Grade Área de conhecimento:</td>
+
+                    <td>{{ curso.nome_curso }}</td>
+                </tr>
+                <tr>
+                    <td>Área Temática:</td>
+
+                    <td>{{ curso.area_tematica }}</td>
+                </tr>
+                <tr>
+                    <td>Início:</td>
+
+                    <td>{{ curso.data_inicio }}</td>
+                </tr>
+                <tr>
+                    <td>Término:</td>
+
+                    <td>{{ curso.data_final }}</td>
+                </tr>
+                <tr>
+                    <td>Área de Conhecimento:</td>
+
+                    <td>{{ curso.area_conhecimento }}</td>
+                </tr>
+                <tr>
+                    <td>Tema:</td>
+
+                    <td>{{ curso.tema }}</td>
+                </tr>
+                <tr>
+                    <td>Vagas Participantes:</td>
+
+                    <td>{{ curso.vagas_participantes }}</td>
+                </tr>
+                <tr>
+                    <td>Público Alvo:</td>
+
+                    <td>{{ curso.publico_alvo }}</td>
+                </tr>
+                <tr>
+                    <td>Carga Horária:</td>
+
+                    <td>{{ curso.carga_horaria }}</td>
+                </tr>
+                {% for equipe in curso.equipe_participante.all %}
+                <tr>
+                    <td>Equipe:</td>
+                    <td>
+                        {{ equipe }}
+                    </td>
+
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td>Situação:</td>
+
+                    <td>{{ curso.situacao }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+    <div class="row m12">
+
+        {% if curso.situacao.id == 2 %}
+
+                {% if user.is_authenticated %}
+            <div class="col l12 m12 s12">
+                   <a href="{% url 'confirmar_inscricao' curso.id %}" class=" btn-incricao waves-effect waves-light btn green accent-4
+                "><i class="material-icons left">description</i>Realizar Inscrição</a>
+            </div>
+                {% else %}
+            <div class="col l12 m12 s12">
+                <p class="paragrafo-login" ><i>*Para realizar inscrição é necessário estar logado no sistema.</i><a class="link-login" href="{% url 'login' %}"> Efetue login. </a></p>
+
+                {% endif %}
+
+            </div>
+
+        {% endif %}
+
+            <div class="col l12 m12 s12">
+                <a href="{% url 'home' %}" class=" btn-cursos waves-effect waves-light btn green accent-4 "
+                ><i class="material-icons left">description</i>Listar Cursos</a>
+            </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+{% endblock %}
