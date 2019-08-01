@@ -12,12 +12,20 @@
             </div>
             {% endif %}
 
+        <div class="row">
+            <div class="col l4">
 
-        <form action="" method="POST" class="col l8 m8 s12  offset-m2 offset-l2 " style="margin-top: 65px;">
+            </div>
+            <div class="col l4 center green dark-4 hoverable white-text">
+                 <h3>ENTRAR</h3>
+            </div>
+        </div>
+
+        <form action="" method="POST" class="col l8 m8 s12  offset-m2 offset-l2 ">
             {% csrf_token %}
 
-            <div class="row" style="margin-top:;">
-                <div class="input-field col l12 m12 s12">
+            <div class="row" style="margin-top:-3%;">
+                <div class="input-field col l12 m12 s12 signup">
                     <i class="material-icons prefix">account_circle</i>
 
                     <label for="id_username">Nome de Usuario</label>
@@ -27,7 +35,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="input-field col l12 m12 s12">
+                <div class="input-field col l12 m12 s12 signup">
                     <i class="material-icons prefix">vpn_key</i>
 
                     <label for="id_password">Senha</label>
@@ -37,11 +45,11 @@
             </div>
 
 
-            <button class="waves-effect waves-light btn green accent-4" style="margin-left:11px;" type="submit">Entrar</button>
-            <div class="row" style="margin-bottom:35px;">
+            <button class="waves-effect waves-light btn green accent-4 btn-home btn-login" type="submit"><i class="material-icons left">arrow_forward</i>Entrar</button>
+            <div class="row">
 
-                <div class="input-field col l12 m12 s12" style="margin-bottom:17px;">
-                     <p>Não Possui conta? <a href="{% url 'signup' %}">Cadastre-se</a></p>
+                <div class="input-field col l12 m12 s12 ">
+                     <p class="link-cadastro">Não Possui conta? <a href="{% url 'signup' %}">Cadastre-se</a></p>
                 </div>
             </div>
         </form>

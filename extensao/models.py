@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils import timezone
+
 
 
 sexo_opções = (
@@ -76,36 +76,36 @@ class EquipeParticipante(models.Model):
 
 class Participante(models.Model):
 	usuario = models.OneToOneField(User, related_name='usuario', on_delete=models.PROTECT)
-	nome = models.CharField('Nome Completo*', max_length=100)
+	nome = models.CharField('Nome Completo', max_length=100)
 	cpf = models.CharField('CPF', max_length=11)
 	sexo = models.CharField('Sexo', choices=sexo_opções, max_length=9)
-	nome_mae = models.CharField('Filiação - Nome da Mãe*', max_length=100)
+	nome_mae = models.CharField('Filiação - Nome da Mãe', max_length=100)
 	responsavel = models.CharField('Filiação - Outro Responsável',
 								   max_length=100)
-	data_nascimento = models.DateField('Data de Nascimento*', )
-	nacionalidade = models.CharField('Nacionalidade*', max_length=100)
+	data_nascimento = models.DateField('Data de Nascimento', )
+	nacionalidade = models.CharField('Nacionalidade', max_length=100)
 	estado_nascimento = models.CharField('Estado Nascimento',
 										 choices=uf_opções, max_length=100)
 	municipio_nascimento = models.CharField('Minicípio de Nascimento',
 											max_length=100)
-	identidade_candidato = models.CharField('Identidade do candidato*',
+	identidade_candidato = models.CharField('Identidade do candidato',
 											max_length=100)
-	data_identidade = models.DateField('Data de Emissão Identidade*', )
-	orgao_emissor = models.CharField('Órgão Emissor*',
+	data_identidade = models.DateField('Data de Emissão Identidade', )
+	orgao_emissor = models.CharField('Órgão Emissor',
 									 choices=orgao_emissor_opções, max_length=100)
-	uf_identidade = models.CharField('UF da Identidade*',
+	uf_identidade = models.CharField('UF da Identidade',
 									 choices=uf_opções, max_length=100)
-	municipio_identidade = models.CharField('Município da Identidade*',
+	municipio_identidade = models.CharField('Município da Identidade',
 											max_length=100)
 	pais_origem = models.CharField('País de Origem', max_length=100, blank=True)
-	logradouro = models.CharField('Logradouro*', max_length=100)
+	logradouro = models.CharField('Logradouro', max_length=100)
 	complemento = models.CharField('Complemento', max_length=100, blank=True)
 	bairro = models.CharField('Bairro', max_length=100)
 	estado = models.CharField('Estado', max_length=100)
-	cidade_endereco = models.CharField('Cidade deste endereço*', max_length=100)
+	cidade_endereco = models.CharField('Cidade deste endereço', max_length=100)
 	cep = models.CharField('CEP', max_length=9)
 	zona = models.CharField('Zona', max_length=100)
-	email = models.EmailField('E-Mail*', max_length=100)
+	email = models.EmailField('E-Mail', max_length=100)
 	telefone_residencial = models.CharField('Telefone Residencial', max_length=15)
 	telefone_celular = models.CharField('Telefone Celular', max_length=15)
 	criado = models.DateTimeField(auto_now_add=True)
@@ -132,7 +132,9 @@ class CursoExtensao(models.Model):
 	vagas_participantes = models.CharField('Vagas Participantes', max_length=5)
 	publico_alvo = models.CharField('Público Alvo', max_length=100)
 	carga_horaria = models.CharField('Carga Horária', max_length=10)
-
+	turno = models.CharField('Turno', max_length=20)
+	periodo = models.CharField('Período', max_length=100, blank=True)
+	ano_letivo = models.CharField('Ano Letivo',max_length=100)
 	equipe_participante = models.ManyToManyField(EquipeParticipante)
 	situacao = models.ForeignKey(Situacao,
 								 on_delete=models.PROTECT)

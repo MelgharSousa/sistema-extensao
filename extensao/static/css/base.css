@@ -1,6 +1,156 @@
 
 
+
+   /*.title{
+      font-family: Arial, Helvetica, sans-serif;
+      text-shadow: 0px 0px 5px black;
+      color: white;
+   }
+
+   .paragrafo{
+        font-size: 1.2em;
+        color: #212121;
+   }
+
+   .title:hover{
+        color:#212121;
+   }*/
+
+   .h5{
+      text-shadow: 2px 2px 4px #000000;
+   }
+
+   /*.h5:hover{
+        text-shadow:none;
+   }*/
+
+    .link-b{
+        color:white;
+    }
+
+    .link-b:hover {
+
+       text-shadow: 2px 2px 4px #000000;
+    }
+
+   .link-a{
+       color:white;
+   }
+
+   .link-a:hover {
+        text-decoration: underline;
+        text-shadow: 2px 2px 4px #000000;
+   }
+
+
+   .siex{
+        text-shadow: 2px 2px 4px #000000;
+   }
+
+   /*.siex:hover{
+        text-shadow: none;
+   }*/
+
+   @keyframes bemvindo1{
+
+        from { color:white; text-shadow: 1px 1px 2px black, 0 0 25px green, 0 0 5px darkgreen;}
+        to {color:darkgreen;}
+   }
+
+   .bemvindo1{
+        color: white;
+        animation-name: bemvindo1;
+        animation-duration: 120s;
+        animation-delay: 0.01s;
+        animation-iteration-count:241;
+        animation-direction: alternate;
+   }
+
+     @keyframes bemvindo2{
+
+        from { color:blue; text-shadow: 1px 1px 2px black, 0 0 25px black, 0 0 5px darkgreen;}
+        to {color:white;}
+   }
+
+   .bemvindo2{
+        color: blue;
+        animation-name: bemvindo2;
+        animation-duration: 10s;
+        animation-delay: 0.01s;
+        animation-iteration-count:5;
+        animation-direction: alternate;
+   }
+
+   .foto_curso {
+        width: 200px;
+        height: 200px;
+   }
+
+   .bemvindo{
+        color: white;
+        text-shadow: 1px 1px 2px black, 0 0 25px green, 0 0 5px darkgreen;
+        margin:2% 0% 0% 77%;
+    }
+
+    .bemvindo:hover{
+        color: darkgreen;
+    }
+
+   .btn-home:hover{
+       opacity:0.9;
+       box-shadow: inset 0 0 0 25px green;
+   }
+
+    .btn-home-yellow:hover{
+       opacity:0.9;
+       box-shadow: inset 0 0 0 25px yellow;
+   }
+
+   .btn-home-red:hover{
+       opacity:0.9;
+       box-shadow: inset 0 0 0 25px red;
+   }
+
+   #b{
+        color:#686868;
+   }
+
+   .signup{
+        margin:10% 0% 0% 0%;
+   }
+
+   .btn-signup{
+        margin: 0% 0% 10% 6%;
+    }
+
+   .btn-login{
+        margin-left: 6%;
+   }
+
+   .link-cadastro{
+        margin-left: 5%;
+   }
+
+   .btn-cursos{
+        margin: 0%;
+        width: 100%;
+    }
+
+   .btn-incricao{
+        margin: 0%;
+        width: 100%;
+   }
+
+   .paragrafo-login{
+        margin: 0%;
+        width: 100%;
+   }
+
+
+
  @media screen and (max-width: 480px) {
+
+
     .siex{
         font-size:13pt;
     }
@@ -18,62 +168,56 @@
         font-size:13pt;
     }
 
-    .btn-cursos{
-         margin-left:8.2%;
-         width:83.2%
+    .bemvindo{
+        margin: 7% 0% 8% 7%;
     }
 
-    .paragrafo-login{
-         margin: 0 0 0 20px;
-    }
-    .material-icons{
-        padding:0 0 0 0;
-    }
-    .btn-incricao{
-        margin-left:6%;
-        width:88%;
+    .signup{
+        margin:10% 5% 0% 5%;
     }
 
+    .btn-signup{
+        margin:0% 0% 0% 7%;
+    }
+
+    .btn-login{
+        margin-left: 15%;
+    }
+
+    .link-cadastro{
+        margin-left: 12%;
+    }
+
+    .link-b{
+        margin-left:58%;
+    }
 }
 
 
 @media screen and (min-width: 480px) and (max-width: 960px) {
-    .btn-cursos{
 
-        margin: 3px 25px 0 60px;
-        width:84%
+    .bemvindo{
+        margin: 4% 0% 4% 1%;
     }
 
-    .paragrafo-login{
-         margin: 0 0 0 140px;
+    .btn-login{
+        margin-left: 10%;
     }
 
-    .btn-incricao{
-        margin-left:7%;
-        width:86%;
-    }
-
+    .link-cadastro{
+        margin-left: 8%;
+        margin-top: 5%;
+   }
 
 
 }
 
 
 @media screen and (min-width: 961px) and (max-width: 2000px) {
-    .paragrafo-login{
-        margin-left:32%;
-    }
-
-    .btn-cursos{
-        margin-left:40.2%;
-        width:18.6%;
-    }
-
-    .btn-incricao{
-        margin-left:40%;
-    }
-
     .siex{
         margin:auto;
-        width:90%;
+        width: 90%;
     }
 }
+
+

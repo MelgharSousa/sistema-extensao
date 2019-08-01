@@ -1,6 +1,8 @@
 from django import forms
 from .models import Participante
 
+
+
 class ParticipanteForm(forms.ModelForm):
 
 	class Meta:
@@ -9,8 +11,12 @@ class ParticipanteForm(forms.ModelForm):
 		exclude = ('usuario',)
 
 
+
 class EditarParticipanteForm(forms.ModelForm):
 
 	class Meta:
 		model = Participante
 		fields = '__all__'
+		widgets = { 'usuario': forms.HiddenInput()}
+
+

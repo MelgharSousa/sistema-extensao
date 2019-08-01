@@ -2,32 +2,91 @@
 
 {% block context %}
 
+{% if user.is_authenticated %}
+
+<div class="row">
+     <div class="col s12">
+         <div class="col l4">
+
+         </div>
+         <div class="col s12 l4">
+            <div class="card hoverable">
+                <div class="card-content ">
+                    <span class="card-title center">CONFIRMAR INSCRIÇÃO</span>
+                        <p>Curso Selecionado: {{curso.nome_curso}}</p>
+                        <p>Nome do Candidato: {{participante.nome}}</p>
+                        <p>CPF: {{participante.cpf}}</p>
+                        <p>Período de Execução: Data Início: {{ curso.data_inicio  }}<br>
+                            Data Final: {{ curso.data_final }}</p>
+                        <p>Carga horária: {{curso.carga_horaria}} Horas</p>
+                </div>
 
 
-            <h4 class="center">CONFIRMAR INSCRIÇÃO</h4>
+
+                <div class="card-action center">
+
+                </div>
+
+            </div>
+         </div>
+     </div>
+  </div>
 
 
-<div class="center">
-        {{curso.nome_curso}}<br/>
-        {{participante.nome}}<br/>
-        {{participante.cpf}}<br/>
-        {{curso.periodo_execucao}}<br/>
-        {{curso.carga_horario}}<br/>
+        <h6 class="center">Concordo que o respectivo curso será ofertado havendo formação de turmas </h6>
 
 
-</div>
- <h6 class="center">Concordo que o respectivo curso será ofertado havendo formação de turmas </h6>
-        </span>
          <div class="switch center">
-            <label>
 
-                <input type="checkbox">
+            <label>
+                <input type="checkbox" name="ativo"  onchange="habilitaBtn()" id="click">
                 <span class="lever"></span>
               Concordar com os termos
             </label>
+
+
+             <div class="row">
+                 <div class="col l3 m3">
+
+                 </div>
+                 <div class="col l3 s12 m3">
+                     <form action="{% url 'inscricao_save' curso.id %}" method="post">
+                        {% csrf_token %}
+
+                        <button id="avancar" type="submit" disabled="disabled"  class="btn-home waves-effect waves-light btn #1b5e20 green accent-4" style="margin-top:10%;">Avançar</button>
+
+                     </form>
+                 </div>
+                 <div class="col l3 s12 m3 center">
+                    <a class="btn-home waves-effect waves-light btn #1b5e20 green accent-4" href="{% url 'home'  %}" style="margin-top:10%;"><i
+                                class="material-icons left"></i>Voltar</a>
+                 </div>
+             </div>
+
          </div>
-<div class="center" style="margin-top:10px;">
- <a href="{% url 'inscricao_save' curso.id %}" class="  waves-effect waves-light btn green accent-4 "
-                        style="margin-left:10px;"><i class="material-icons left">description</i>Confirmar inscrição</a>
-</div>
+
+            <script type="text/javascript">
+                    function habilitaBtn () {
+
+                       if(document.getElementById('click').checked == true){
+            	            document.getElementById('avancar').disabled = ""
+
+            	       }if(document.getElementById('click').checked == false){
+                            document.getElementById('avancar').disabled = "disabled"
+                        }
+                    }
+            </script>
+
+
+
+{% else %}
+        <div class="center red lighten-4 hoverable" >
+            <p><a href="{% url 'login' %}" style="line-height: 1;
+                font-family: Roboto, sans-serif;
+                font-weight: normal;
+                border-bottom: 1px solid;
+                color: rgba(0,0,0,0.87);">Você precisa está logado no sistema</a></p>
+         </div>
+{% endif %}
+
 {% endblock %}

@@ -2,15 +2,16 @@
 
 {% block context %}
 
+{% if user.is_authenticated %}
 
 <div class="row">
-            {% if  form.errors %}
+            {% if messages %}
+                 <div class="center red lighten-4 hoverable ">
+            {% for message in messages %}
 
-                <div class="center red lighten-4 hoverable ">
-                    {{ form.old_password.errors }}
-                    {{ form.new_password2.errors }}
-                </div>
-
+                    <p>{{ message }}</p>
+            {% endfor %}
+                 </div>
             {% endif %}
 
         <form class="col s8 offset-s2" action="" method="POST" >
@@ -20,24 +21,34 @@
                 <div class="input-field col s12">
                     <i class="material-icons prefix">account_circle</i>
                     {{ form.old_password }}
-                    <label for="password">Senha Antiga</label>
+                    <label for="id_old_password">Senha Antiga</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
                     <i class="material-icons prefix">vpn_key</i>
                     {{ form.new_password1 }}
-                    <label for="password">Nova Senha</label>
+                    <label for="id_new_password1">Nova Senha</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
                     <i class="material-icons prefix">check</i>
                     {{ form.new_password2 }}
-                    <label for="password">Confirmar Nova Senha</label>
+                    <label for="id_new_password2">Confirmar Nova Senha</label>
                 </div>
             </div>
-			<button class="waves-effect waves-light btn green accent-4" style="margin-left:11px; type="submit">Alterar minha senha</button>
+			<button class="btn-home waves-effect waves-light btn green accent-4" style="margin-left:11px;" type="submit"><i class="material-icons left">update</i>Alterar minha senha</button>
         </form>
 </div>
+{% else %}
+         <div class="center red lighten-4 hoverable" >
+            <p><a href="{% url 'login' %}" style="line-height: 1;
+                font-family: Roboto, sans-serif;
+                font-weight: normal;
+                border-bottom: 1px solid;
+                color: rgba(0,0,0,0.87);">Você precisa está logado no sistema</a></p>
+         </div>
+
+{% endif %}
 {% endblock %}

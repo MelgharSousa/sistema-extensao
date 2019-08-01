@@ -25,7 +25,8 @@ SECRET_KEY = 'tu0(3$oxstvi5)kh00)dxy!op_%nugnn$zy5n!-8n_xak)e4zn'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+
+ALLOWED_HOSTS = ['192.168.100.228']
 
 
 # Application definition
@@ -59,7 +60,7 @@ ROOT_URLCONF = 'projeto.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -128,7 +129,7 @@ MEDIA_ROOT = (
 MEDIA_URL = '/media/' #endereço para acessar os arquivos
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'participante'
 LOGOUT_REDIRECT_URL = 'home'
 
 

@@ -1,0 +1,75 @@
+{% extends "extensao/base.html" %}
+{% block context %}
+
+    <div class="center green lighten-4 hoverable ">
+        {% for message in messages %}
+            {% if "cadastrado" in message.tags %}
+                <p class="{{ message.tags }}">{{ message }}</p>
+            {%endif%}
+        {% endfor %}
+
+    </div>
+
+    <div class="center red lighten-4 hoverable ">
+        {% for message in messages %}
+            {% if "editado" in message.tags %}
+                <p  class="{{ message.tags }}">
+                    <a href="{% url 'participante' %}" style="color:black; text-decoration: underline;">
+                          {{ message }}</a></p>
+            {%endif%}
+        {% endfor %}
+    </div>
+
+    <div class="row green darken-3" style="padding:2% 0% 1% 0%;">
+       <div class="col l12 m12 s12 ">
+            <h5 style="margin-top: -2%;">Filtrar Cursos por:</h5>
+       </div>
+      <div class="col l2 m2 s12 ">
+             <a class="link-b" href="{% url 'home' %}">Todos Cursos</a>
+       </div>
+       <div class="col l2 m2 s12 ">
+             <a  class="link-b" href="{% url 'novos_cursos' %}">Novos Cursos</a>
+       </div>
+       <div class="col l2 m2 s12 ">
+            <a style="color:black"  href="{% url 'inscricoes_abertas' %}">Inscrições Abertas</a>
+       </div>
+       <div class="col l2 m2 s12 ">
+            <a class="link-b" href="{% url 'inscricoes_finalizadas' %}">Inscrições Finalizadas</a>
+       </div>
+       <div  class="col l2 m2 s12 ">
+           <a class="link-b" href="{% url 'concluidos' %}">Concluídos</a>
+       </div>
+   </div>
+
+
+  <div class="row">
+            {% for curso in cursos %}
+        <div class="col s12 m6 l3 ">
+
+            <div class="card hoverable">
+                <div class="card-image responsive-img">
+                    <img   src="{{ curso.foto_curso.url }}" class="foto_curso">
+                </div>
+                <div class="card-content" >
+                    <p id="b">Curso: {{ curso.nome_curso }}</p>
+                    <p id="b">Data Início: {{ curso.data_inicio  }}</p>
+                    <p id="b">Data Final: {{ curso.data_final }}</p>
+                    <p id="b">Carga Horária: {{ curso.carga_horaria}} horas</p>
+                    <p id="b">Situação: {{ curso.situacao }} </p>
+
+                </div>
+
+                <div class="card-action center"><a class="waves-effect waves-light btn  btn-home #1b5e20 green darken-4"
+                     href="{% url 'detalhes_curso' curso.id %}"><i class="material-icons left">description</i>Detalhes</a>
+                </div>
+
+            </div>
+
+        </div>
+            {% endfor %}
+    </div>
+
+
+
+
+{% endblock %}

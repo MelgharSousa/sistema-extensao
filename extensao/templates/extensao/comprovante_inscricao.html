@@ -9,7 +9,7 @@
 </head>
 <body>
 
-
+{% if user.is_authenticated %}
   <div class="row">
     <form class="col s12" style="margin-top:80px;">
       <div class="row">
@@ -22,23 +22,23 @@
       <div class="row">
         <div class="input-field col s4">
             <label for="icon_prefix">TURNO:</label>
-            <input id="icon_prefix" type="text" value="" class="validate">
+            <input id="icon_prefix" type="text" value="{{ inscricao.curso_extensao.turno }}" readonly class="validate">
 
         </div>
         <div class="input-field col s4">
             <label for="icon_telephone">SÉRIE/MÓDULO/PERÍODO:</label>
-            <input id="icon_telephone" type="tel" class="validate">
+            <input id="icon_telephone" type="tel" value="{{ inscricao.curso_extensao.periodo }}" readonly class="validate">
 
         </div>
         <div class="input-field col s4">
             <label for="icon_telephone">ANO LETIVO:</label>
-            <input id="icon_telephone" type="tel" class="validate">
+            <input id="icon_telephone" type="tel" value="{{ inscricao.curso_extensao.ano_letivo }}" readonly class="validate">
         </div>
       </div>
        <div class="row">
         <div class="input-field col s12">
             <label for="icon_prefix">NOME DO ALUNO:</label>
-            <input id="icon_prefix" type="text" value="{{ inscricao.participante.nome }}"  readonly class="validate">
+            <input id="icon_prefix" type="text" value="{{ inscricao.participante.nome }}" readonly class="validate">
         </div>
 
        </div>
@@ -49,7 +49,7 @@
         </div>
         <div class="input-field col s6">
             <label for="icon_prefix">Assinatura do Servidor:</label>
-            <input id="icon_prefix" type="text" class="validate">
+            <input id="icon_prefix" type="text"  readonly  class="validate">
         </div>
        </div>
       </div>
@@ -57,8 +57,8 @@
   </div>
    <div class="row">
         <div class="col s6 center">
-            <a onclick="window.print()" class="waves-effect waves-light btn green accent-4"><i
-                            class="material-icons left"></i>Imprimir</a>
+            <a onclick="window.print()" id="1" class="waves-effect waves-light btn green accent-4"><i
+                    class="material-icons left"></i>Imprimir</a>
         </div>
 
         <div class="col s6 center">
@@ -66,6 +66,19 @@
                             class="material-icons left"></i>Voltar</a>
         </div>
     </div>
+
+{% else %}
+
+<div class="center red lighten-4 hoverable ">
+    {%for message in messages %}
+        {%if "comprovante02" in message.tags %}
+            <p  class="{{ message.tags }}">
+                    <a href="{% url 'login' %}" style="color:rgba(0,0,0,0.87)" >
+                          {{ message }}</a></p>
+         {%endif%}
+    {%endfor%}
+    </div>
+{% endif %}
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
 

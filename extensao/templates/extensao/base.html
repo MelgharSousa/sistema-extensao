@@ -7,13 +7,13 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css" />
 	 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+
+
     <title>Sistema de extensão</title>
 </head>
 <body style="background-color:#fafafa;">
 
-
-
-	<nav>
+    <nav>
         <div class="nav-wrapper green darken-3">
 
             <a href="#" class="brand-logo"> <h5 class="siex" style="margin-top:20px;"> SIEX - Sistema de Extensão</h5></a>
@@ -22,39 +22,41 @@
             </a>
 
             <ul class="right hide-on-med-and-down green darken-4">
-                <li><a href="{% url 'home' %}">Início</a></li>
+                <li><a class="link-a" href="{% url 'home' %}">Início</a></li>
 
 				{% if user.is_authenticated %}
 
-                <li class="green darken-4" ><a href="{% url 'participante_detalhes' user.id %}"> Dados Pessoais</a></li>
-                <li class="green darken-4"><a href="{% url 'minhas_inscricoes' %}">Minhas incrições</a></li>
-                <li class="green darken-4"><a href="{% url 'alterar_senha' %}">Alterar Senha</a></li>
-                <li class="green darken-4"><a href="{% url 'logout' %}">Sair</a></li>
+                <li class="green darken-4 "><a class="link-a" href="{% url 'participante_detalhes' user.id %}"> Dados Pessoais</a></li>
+                <li class="green darken-4 " ><a class="link-a" href="{% url 'minhas_inscricoes' user.id %}">Minhas Incrições</a></li>
+                <li class="green darken-4 "><a class="link-a" href="{% url 'alterar_senha' %}">Alterar Senha</a></li>
+                <li class="green darken-4 "><a class="link-a"  href="{% url 'logout' %}">Sair</a></li>
 
                 {% else %}
 
-                    <li><a href="{% url 'signup' %}">Cadastre-se</a></li>
-                    <li><a href="{% url 'login' %}">Entrar</a></li>
+                    <li><a class="link-a" href="{% url 'signup' %}">Cadastre-se</a></li>
+                    <li><a class="link-a"  href="{% url 'login' %}">Entrar</a></li>
 				{% endif %}
             </ul>
 
 
 
-            <ul class="side-nav green accent-4" id="menu-mobile">
-                <li><a href="{% url 'home' %}">Início</a></li>
+            <ul class="side-nav green darken-1" id="menu-mobile">
+                <li><a class="white-text" href="{% url 'home' %}"><i class="material-icons left"> home</i>Início</a></li>
 
 				{% if user.is_authenticated %}
-                    <li><a href="{% url 'alterar_senha' %}">Alterar senha</a></li>
-                    <li><a href="{% url 'participante_detalhes' user.id %}">  Dados Pessoais</a></li>
-                    <li><a href="{% url 'minhas_inscricoes' %}">Minhas incrições</a></li>
-                    <li><a href="{% url 'logout' %}">Sair</a></li>
+                    <li><a class="link-a white-text" href="{% url 'alterar_senha' %}"><i class="material-icons left">update</i>Alterar senha</a></li>
+                    <li><a class="link-a white-text" href="{% url 'participante_detalhes' user.id %}"><i class="material-icons left">person</i>  Dados Pessoais</a></li>
+                    <li><a class="link-a white-text" href="{% url 'minhas_inscricoes' user.id %}"><i class="material-icons left"> description</i>Minhas Incrições</a></li>
+                    <li><a class="link-a white-text" href="{% url 'logout' %}"><i class="material-icons left"> exit_to_app</i>Sair</a></li>
 				{% else %}
-                    <li><a href="{% url 'signup' %}">Cadastre-se</a></li>
-                    <li><a href="{% url 'login' %}">Entrar</a></li>
+                    <li><a class="link-a white-text" href="{% url 'signup' %}">Cadastre-se</a></li>
+                    <li><a class="link-a white-text" href="{% url 'login' %}">Entrar</a></li>
 				{% endif %}
 
             </ul>
         </div>
+
+
     </nav>
         <h5 class="bemvindo"> {% if user.is_authenticated %}
 	         Bem Vindo ao Site, {{ user.username }}
@@ -64,55 +66,65 @@
     </h5>
 
 
-    <div class="row">
+
+
+    <div class="row"  style="margin-top:1%;">
         <div class="col s5">
             <img  class="right" alt="django" src="/media/copy2_of_topo_ifpi_angical.png">
         </div>
         <div class="col s7">
-            <h4 class="title" style="font-family: Arial, Helvetica, sans-serif;">Instituto Federal do Piauí</h4>
-            <p class="paragrafo" style="font-size: 1.2em;">Ministério da Educação</p>
+            <h4> Instituto Federal do Piauí</h4>
+            <p>Ministério da Educação</p>
         </div>
 
     </div>
-    <div  class="green darken-4 " style="height:1px;"> </div>
+    <div  class="green darken-4 " style="height:1px; margin-bottom:23px;"> </div>
 
 
- {% block context %}
- {% endblock %}
+    {% block context %}
+    {% endblock %}
 
 
 	   <footer class="page-footer green darken-3" style="margin-top:10px; margin-bottom:-20px;">
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
-                    <h5 class="white-text">Campus Angical</h5>
-                    <p class="white-text">Coordenação de Tecnologia da Informação.</p>
+                    <h5 class="white-text h5">Campus Angical</h5>
+                    <p class="white-text" h5>Coordenação de Tecnologia da Informação.</p>
                 </div>
                 <div class="col l4 offset-l2 s12">
-                    <h5 class="white-text">VISITE</h5>
+                    <h5 class="white-text h5">VISITE</h5>
                     <ul>
-                        <li><a class="white-text" href="#!">IFPI</a></li>
-                        <li><a class="white-text" href="#!">SARI-Angical</a></li>
-                        <li><a class="white-text" href="#!">IFPI-Angical</a></li>
-                        <li><a class="white-text" href="#!">Biblioteca</a></li>
+                        <li><a class="link-a"  href="http://libra.ifpi.edu.br/angical" target="_blank">IFPI-Angical</a></li>
+                        <li><a class="link-a"  href="http://sari.angical.ifpi.edu.br/sari/login.jsf" target="_blank">SARI-Angical</a></li>
+                        <li><a class="link-a"  href="http://libra.ifpi.edu.br/area-do-estudante/biblioteca" target="_blank">Biblioteca</a></li>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="footer-copyright">
             <div class="container center white-text">
-                © 2019 Todos os direitos reservados ao IFPI - Campus Angical
+                © 2019 Todos os direitos reservados ao IFPI - <a style="color:white;font-weight: bold;" class="link-a" href="https://www.facebook.com/campusangical/" target="_blank">Campus Angical</a>
             </div>
         </div>
     </footer>
 
+    <script type="text/javascript" src="js/materialize.min.js"></script>
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
     <script>
         $(function () {
             $(".button-collapse").sideNav();
+            $(".sidenav-trigger").sideNav();
             $('.dropdown-trigger').dropdown();
+
         });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems, options);
+        });
+
     </script>
 
 </body>

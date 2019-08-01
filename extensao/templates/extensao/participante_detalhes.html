@@ -1,7 +1,7 @@
 {% extends "extensao/base.html" %}
 {% block context %}
 
-    {% if user.is_authenticated %}
+{% if user.is_authenticated %}
 <div class="row" style="margin-top:10px">
    <table class=" highlight striped col s10 offset-s1">
             <tbody>
@@ -56,7 +56,7 @@
                     <td>{{ participante.identidade_candidato }}</td>
                 </tr>
                 <tr>
-                    <td>Data de Emissão Identidade:</td>
+                    <td>Data de Emissão da Identidade:</td>
 
                     <td>{{ participante.data_identidade }}</td>
                 </tr>
@@ -112,7 +112,7 @@
                     <td>{{ participante.cep }}</td>
                 </tr>
                  <tr>
-                    <td>ZONA:</td>
+                    <td>Zona:</td>
 
                     <td>{{ participante.zona }}</td>
                 </tr>
@@ -135,10 +135,39 @@
         </table>
 </div>
             <!-- botão -->
-        <div class="card-action center">
-            <a href="{% url 'editar' user.id %}" class="waves-effect waves-light btn green accent-4 modal-trigger" href="#modal1"
-                style="margin-top:10px"><i class="material-icons left">description</i>Editar Dados</a>
+        <div class="row">
+            <div class="col l4 m4 s1">
+
+            </div>
+            <div class="col l4 m4 s10">
+                <div class="card-action center">
+                    <a href="{% url 'editar' user.id %}" class="btn-home waves-effect waves-light btn green accent-4 " style="width:100%;"
+                        ><i class="material-icons left">update</i>Editar Dados</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col l4 m4 s1">
+
+            </div>
+            <div class="col l4 m4 s10">
+                <div class="card-action center">
+                    <a href="{% url 'home' %}" class="btn-home waves-effect waves-light btn green accent-4 " style="width:100%;"
+                        ><i class="material-icons left">arrow_back</i>Voltar</a>
+                </div>
+            </div>
         </div>
 
-    {% endif %}
+{% else %}
+
+    <div class="center red lighten-4 hoverable ">
+    {% for message in messages %}
+        {% if "editado01" in message.tags %}
+            <p  class="{{ message.tags }}">
+                    <a href="{% url 'login' %}" style="color:black; text-decoration: underline;">
+                          {{ message }}</a></p>
+         {%endif%}
+    {% endfor %}
+    </div>
+{% endif %}
 {% endblock %}
