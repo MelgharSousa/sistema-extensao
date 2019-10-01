@@ -1,55 +1,53 @@
 {% extends "extensao/base.html" %}
 
 {% block context %}
-{% if user.is_authenticated %}
+    {% if user.is_authenticated %}
 
     <div class="row">
-        <div class="col l12 m12">
-            <div class="s12 l4 m12">
-
+        <div class="s12 m12 l4 center btn-home">
+            <div class="card blue-grey darken-1">
+                <div class="card-content">
+                    <span class="card-title white-text ">Parabéns! Pré-inscrição realizada com sucesso!</span>
+                    <h3  id="title-h3">Curso: {{ inscricao.curso_extensao.nome_curso }}</h3>
+                    <p class="white-text">
+                        Para confirmar a sua inscrição, compareça a Coordenação de Extensão IFPI - Campus Angical com este comprovante acompanhado dos
+                        seguintes documentos( Original e Cópia): RG, CPF, Título Eleitoral e Carteira de Reservista.
+                        Até o dia {{ inscricao.curso_extensao.data_inscricoes_final }}
+                    </p>
+                </div>
+                <div class="card-action"></div>
             </div>
-            <div class="s12 l4 m12 center btn-home">
-                <div class="card blue-grey darken-1">
-                    <div class="card-content">
-                        <span class="card-title bemvindo2">Parabéns! Inscrição Realizada com Sucesso!</span>
-                        <h3 class="bemvindo1">Você se inscreveu no curso de {{ inscricao.curso_extensao.nome_curso }}</h3>
-                        <p class="">Comparecer a Coordenação de Extensão IFPI - Campus Angical com o seguinte comprovante!</p>
-                    </div>
-                    <div class="card-action">
-
-                    </div>
-              </div>
-            </div>
-         </div>
-    </div>
-    <div class="row">
-        <div class="col l4">
-
         </div>
-        <div class="col l4 m12 s12 ">
-                    <a href="{% url 'comprovante_inscricao' inscricao.id %}" class="btn-home waves-effect waves-light btn green accent-4 " style="width:100%;">
-                        <i class="material-icons left">description</i>Gerar comprovante</a>
+
+    </div>
+
+    <div class="row">
+        <div class="col l4 m12 s12 offset-l4 center">
+            <a href="{% url 'comprovante_inscricao' inscricao.id %}" class="btn-home waves-effect waves-light btn green accent-4 btn-voltar-beta"
+               target="_blank"><i class="material-icons left">description</i>Gerar comprovante</a>
         </div>
     </div>
     <div class="row">
-        <div class="col l4">
-
-        </div>
-        <div class="col l4 m12 s12 center">
-                    <a href="{% url 'home' %}" class="btn-home waves-effect waves-light btn green accent-4 " style="width:100%;">
-                        <i class="material-icons left">arrow_back</i>Voltar</a>
+        <div class="col l4 m12 s12 offset-l4 center">
+            <a href="{% url 'home' %}" class="btn-home waves-effect waves-light btn green accent-4 btn-voltar-beta">
+                <i class="material-icons left">arrow_back</i>Voltar</a>
         </div>
     </div>
-{% else %}
+
+    {% else %}
+
     <div class="center red lighten-4 hoverable ">
-    {%for message in messages %}
-        {%if "comprovante01" in message.tags %}
-            <p style="color:bold;" class="{{ message.tags }}">
-                    <a href="{% url 'login' %}" style="color:black; text-decoration: underline;}">
+
+        {% for message in messages %}
+        {% if "comprovante01" in message.tags %}
+            <p class="{{ message.tags }}">
+                    <a class="alerts-link" href="{% url 'login' %}" >
                           {{ message }}</a></p>
-         {%endif%}
-    {%endfor%}
+         {% endif %}
+    {% endfor %}
+
     </div>
-{% endif %}
+
+    {% endif %}
 
 {% endblock %}

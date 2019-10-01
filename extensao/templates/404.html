@@ -1,17 +1,164 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>404</title>
 </head>
 <body>
+     <nav>
+        <div class="nav-wrapper green darken-3">
 
-    <h1>Página não encontrada</h1>
-        {{ request_path }}
-        {{  exception }}
+            <a class="brand-logo"> <h5 class="siex"> SIEX - Sistema de Extensão</h5></a>
+            <a href="#" data-activates="menu-mobile" class="button-collapse">
+                <i class="material-icons">menu</i>
+            </a>
+
+            <ul class="right hide-on-med-and-down green darken-4">
+                <li><a class="link-a" href="{% url 'home' %}">Início</a></li>
+
+				{% if user.is_authenticated %}
+
+                    <li class="green darken-4 "><a class="link-a" href="{% url 'participante_detalhes' %}"> Dados Pessoais</a></li>
+                    <li class="green darken-4 "><a class="link-a" href="{% url 'minhas_inscricoes' %}">Minhas Incrições</a></li>
+                    <li class="green darken-4 "><a class="link-a" href="{% url 'alterar_senha' %}">Alterar Senha</a></li>
+                    <li class="green darken-4 "><a class="link-a"  href="{% url 'logout' %}">Sair</a></li>
+
+                {% else %}
+
+                    <li><a class="link-a" href="{% url 'signup' %}">Cadastre-se</a></li>
+                    <li><a class="link-a"  href="{% url 'login' %}">Entrar</a></li>
+				{% endif %}
+            </ul>
+
+
+
+            <ul class="side-nav green darken-1" id="menu-mobile">
+                <li><a class="white-text" href="{% url 'home' %}"><i class="material-icons left"> home</i>Início</a></li>
+
+				{% if user.is_authenticated %}
+                    <li><a class="link-a white-text" href="{% url 'alterar_senha' %}"><i class="material-icons left">update
+                    </i>Alterar senha</a></li>
+                    <li><a class="link-a white-text" href="{% url 'participante_detalhes' %}"><i class="material-icons left">person
+                    </i>Dados Pessoais</a></li>
+                    <li><a class="link-a white-text" href="{% url 'minhas_inscricoes'  %}"><i class="material-icons left">description
+                    </i>Minhas Incrições</a></li>
+                    <li><a class="link-a white-text" href="{% url 'logout' %}"><i class="material-icons left">exit_to_app
+                    </i>Sair</a></li>
+				{% else %}
+                    <li><a class="link-a white-text" href="{% url 'signup' %}"><i class="material-icons left">arrow_forward</i>Cadastre-se</a></li>
+                    <li><a class="link-a white-text" href="{% url 'login' %}"><i class="material-icons left">arrow_forward</i>Entrar</a></li>
+				{% endif %}
+
+            </ul>
+
+        </div>
+    </nav>
+
+     <div class="row">
+        <div class="col l4 m4 s12 offset-l8 offset-m8 ">
+            <h5 class="bemvindo">
+        {% if user.is_authenticated %}
+	         Bem Vindo ao Site, {{ user.username }}
+        {% else %}
+             Bem Vindo ao Site, Visitante
+        {% endif %}
+    </h5>
+        </div>
+    </div>
+
+
+
+    <div class="row body-base">
+        <div class="col s5">
+            <img  class="right" alt="django" src="/media/copy2_of_topo_ifpi_angical.png">
+        </div>
+        <div class="col s7">
+            <h4 class="ifpi"> Instituto Federal do Piauí</h4>
+            <p>Ministério da Educação</p>
+        </div>
+
+    </div>
+    <div  class="green darken-4 separa-base"></div>
+
+     {{ request_path }}
+     {{  exception }}
+
+     <div class="row">
+
+            <div class="col s12 m6 l4 offset-l4" style="margin:2.5% 0% 2.5% 0%;">
+
+                <div class="card hoverable">
+
+                    <div class="card-content grey-text center">
+                        <h4>Sistema de Extensão</h4>
+                    </div>
+
+                     <div class="card-action center"><a class="waves-effect waves-light btn  btn-home #1b5e20 green darken-4"
+                        href="{% url 'home' %}"><i class="material-icons left">description</i>Voltar</a>
+                     </div>
+
+                </div>
+
+            </div>
+        </div>
+
+     <footer class="page-footer green darken-3">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 m6 s12">
+                    <h5 class="white-text footer-h5">Campus Angical</h5>
+                    <p class="white-text" >Coordenação de Tecnologia da Informação.</p>
+                </div>
+                <div class="col l4 m4 s12 offset-l2 offset-m2">
+                    <h5 class="white-text footer-h5">VISITE</h5>
+                    <ul>
+                        <li><a class="link-a"  href="http://libra.ifpi.edu.br/angical" target="_blank">IFPI-Angical</a></li>
+                        <li><a class="link-a"  href="http://sari.angical.ifpi.edu.br/sari/login.jsf" target="_blank">SARI-Angical</a></li>
+                        <li><a class="link-a"  href="http://libra.ifpi.edu.br/area-do-estudante/biblioteca" target="_blank">Biblioteca</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container center white-text">
+                <span>© 2019 Todos os direitos reservados ao IFPI -</span> <a  class="link-a" id="copy-link"
+                 href="https://www.facebook.com/campusangical/" target="_blank">Campus Angical</a>
+            </div>
+        </div>
+    </footer>
+
+   <script>
+      Swal.fire({
+      type: 'error',
+      title: 'Oops... Erro 404',
+      text: 'Página Não Encontrada!',
+    })
+    </script>
+
+
+ <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+
+
+    <script>
+        $(function () {
+            $(".button-collapse").sideNav();
+            $(".sidenav-trigger").sideNav();
+            $('.dropdown-trigger').dropdown();
+
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems, options);
+        });
+    </script>
 
 </body>
 </html>

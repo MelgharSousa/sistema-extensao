@@ -1,7 +1,32 @@
 {% extends "extensao/base.html" %}
 
 {% block context %}
+        <div class="row">
 
-<h1>Ops... ocorreu um erro na Página</h1>
+            <div class="col s12 m6 l4 offset-l4 card-500">
+
+                <div class="card hoverable">
+
+                    <div class="card-content grey-text center">
+                        <h4>Sistema de Extensão</h4>
+                    </div>
+
+                     <div class="card-action center"><a class="waves-effect waves-light btn  btn-home #1b5e20 green darken-4"
+                        href="{% url 'home' %}"><i class="material-icons left">description</i>Voltar</a>
+                     </div>
+
+                </div>
+
+            </div>
+        </div>
+
+<script>
+      Swal.fire({
+      type: 'error',
+      title: 'Oops... Erro 500',
+      text: 'Ocorreu um Erro na Aplicação!',
+    })
+
+</script>
 
 {% endblock %}

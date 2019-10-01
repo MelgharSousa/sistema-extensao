@@ -3,50 +3,50 @@
 
     <div class="center red lighten-4 hoverable ">
         {% for message in messages %}
-            {% if "inscricao4" in message.tags %}
-            {%endif%}
+            {% if "inscricao3" in message.tags %}
+                <p class="{{ message.tags }}">
+                        <a class="alerts-link" href="{% url 'home' %} ">
+                              {{ message }}</a></p>
+             {% endif %}
+        {% endfor %}
+    </div>
+
+
+    <div class="row">
+        {% for inscricao in inscricoes %}
+            <div class="col s12 l4">
+
+                <div class="card hoverable">
+
+                    <div class="card-content grey-text">
+                        <span class="card-title center" id="nome-curso">{{  inscricao.curso_extensao.nome_curso  }}</span>
+
+                            <p class="table">Nome do Candidato: {{  inscricao.participante.nome }}</p>
+                            <p class="table">CPF: {{ inscricao.participante.cpf }}</p>
+                            <p class="table">Data Início: {{ inscricao.curso_extensao.data_inicio }}</p>
+                            <p class="table">Data Final:  {{ inscricao.curso_extensao.data_final }}</p>
+                            <p class="table">Carga horária: {{ inscricao.curso_extensao.carga_horaria }} horas</p>
+                            <p class="table">Situação da Inscrição: {{ inscricao.situacao_inscricao }}</p>
+
+                    </div>
+
+                    <div class="card-action center">
+                         <a href="{% url 'comprovante_inscricao' inscricao.id %}" class="btn-home waves-effect waves-light btn green accent-4 center"
+                            target="_blank"><i class="material-icons left">description</i>Gerar comprovante</a>
+                    </div>
+
+                </div>
+
+            </div>
         {% endfor %}
     </div>
 
     <div class="row">
-
-       {% for inscricao in inscricoes %}
-
-            <div class="col s12 l6">
-                <div class="card hoverable">
-                    <div class="card-content ">
-                        <span class="card-title center">{{  inscricao.curso_extensao.nome_curso  }}</span>
-
-                            <p>Nome do Candidato: {{  inscricao.participante.nome }}</p>
-                            <p>CPF: {{ inscricao.participante.cpf }}</p>
-                            <p>Período de Execução:<br>
-                                Data Início: {{ inscricao.curso_extensao.data_inicio }}<br>
-                                Data Final:  {{ inscricao.curso_extensao.data_final }}</p>
-                            <p>Carga horária: {{ inscricao.curso_extensao.carga_horaria }} horas</p>
-                    </div>
-
-
-
-                    <div class="card-action center">
-                         <a href="{% url 'comprovante_inscricao' inscricao.id %}" class="btn-home waves-effect waves-light btn green accent-4 center ">
-                            <i class="material-icons left">description</i>Gerar comprovante</a>
-                    </div>
-
-                </div>
-             </div>
-
-
-        {% endfor %}
-          <div class="row">
-            <div class="col l4 m4 s1">
-
-            </div>
-            <div class="col l4 m4 s10">
-                <div class="card-action center">
-                    <a href="{% url 'home' %}" class="btn-home waves-effect waves-light btn green accent-4 " style="width:100%;"
-                        ><i class="material-icons left">arrow_back</i>Voltar</a>
-                </div>
+        <div class="col l4 m4 s10 offset-l4 offset-m4 offset-s1">
+            <div class="card-action center">
+                <a href="{% url 'home' %}" class="btn-home waves-effect waves-light btn green accent-4 btn-editar"
+                ><i class="material-icons left">arrow_back</i>Voltar</a>
             </div>
         </div>
+    </div>
 {% endblock %}
-

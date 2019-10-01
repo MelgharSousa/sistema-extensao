@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-
 sexo_opções = (
     ('M', 'Masculino'),
     ('F', 'Feminino'),
@@ -90,7 +89,9 @@ class Participante(models.Model):
 											max_length=100)
 	identidade_candidato = models.CharField('Identidade do candidato',
 											max_length=100)
-	data_identidade = models.DateField('Data de Emissão Identidade', )
+	titulo = models.CharField('Título de Eleitor', max_length=12)
+	reservista = models.CharField('Carteira de Reservista', max_length=12)
+	data_identidade = models.DateField('Data de Emissão Identidade')
 	orgao_emissor = models.CharField('Órgão Emissor',
 									 choices=orgao_emissor_opções, max_length=100)
 	uf_identidade = models.CharField('UF da Identidade',
@@ -104,10 +105,10 @@ class Participante(models.Model):
 	estado = models.CharField('Estado', max_length=100)
 	cidade_endereco = models.CharField('Cidade deste endereço', max_length=100)
 	cep = models.CharField('CEP', max_length=9)
-	zona = models.CharField('Zona', max_length=100)
 	email = models.EmailField('E-Mail', max_length=100)
-	telefone_residencial = models.CharField('Telefone Residencial', max_length=15)
+	telefone_residencial = models.CharField('Telefone Residencial', max_length=15, blank=True)
 	telefone_celular = models.CharField('Telefone Celular', max_length=15)
+	foto_perfil =models.ImageField(upload_to='media', blank=True)
 	criado = models.DateTimeField(auto_now_add=True)
 	modificado = models.DateTimeField(auto_now=True)
 
@@ -117,32 +118,26 @@ class Participante(models.Model):
 
 
 class CursoExtensao(models.Model):
-	nome_curso = models.CharField('Nome do curso', max_length=100)
-	grade_area_conhecimento = models.CharField('Grade Área de Conhecimento',
-											   max_length=100)
+	nome_curso = models.CharField('Nome do Curso', max_length=100)
+	resumo_curso = models.TextField('Resumo do Curso')
 	area_tematica = models.CharField('Área Temática', max_length=100)
-	data_inicio = models.DateField('Periodo de execução inicial')
-	data_final = models.DateField('Periodo de execução final')
-
-	area_conhecimento = models.CharField('Área de Conhecimento',
-										 max_length=100)
+	data_inicio = models.DateField('Período de Execução Inicial')
+	data_final = models.DateField('Período de Execução Final')
+	data_inscricoes_inicial = models.DateField('Período Inicial das Inscrições')
+	data_inscricoes_final = models.DateField('Período Final das Inscrições')
+	area_conhecimento = models.CharField('Área de Conhecimento',max_length=100)
 	tema = models.CharField('Tema', max_length=100)
-	possui_cunho_social = models.CharField('Possui Cunho Social',
-										   max_length=100)
+	possui_cunho_social = models.CharField('Possui Cunho Social',max_length=100)
 	vagas_participantes = models.CharField('Vagas Participantes', max_length=5)
 	publico_alvo = models.CharField('Público Alvo', max_length=100)
 	carga_horaria = models.CharField('Carga Horária', max_length=10)
 	turno = models.CharField('Turno', max_length=20)
-	periodo = models.CharField('Período', max_length=100, blank=True)
-	ano_letivo = models.CharField('Ano Letivo',max_length=100)
+	periodo_letivo = models.CharField('Ano Letivo', max_length=100)
 	equipe_participante = models.ManyToManyField(EquipeParticipante)
-	situacao = models.ForeignKey(Situacao,
-								 on_delete=models.PROTECT)
+	situacao = models.ForeignKey(Situacao,on_delete=models.PROTECT, default=1)
 	foto_curso = models.ImageField(default='default.png', blank=True, upload_to='media')
-	status = models.BooleanField("Status")
 	criado = models.DateTimeField(auto_now_add=True)
 	modificado = models.DateTimeField(auto_now=True)
-
 
 	class Meta:
 		verbose_name_plural = 'Cursos'
@@ -151,12 +146,35 @@ class CursoExtensao(models.Model):
 		return self.nome_curso
 
 
+class Arquivo(models.Model):
+	arquivo = models.FileField(upload_to='media', blank=True)
+	nome_arquivo = models.CharField("Nome do Arquivo", max_length=100)
+	descricao = models.TextField('Descrição do Arquivo')
+	curso = models.ForeignKey(CursoExtensao, related_name='arquivo', on_delete=models.PROTECT)
+	criado = models.DateTimeField(auto_now_add=True)
+	modificado = models.DateTimeField(auto_now=True)
+
+	def __str__(self):
+		return self.nome_arquivo
+
+
+class SituacaoInscricao(models.Model):
+	situacao_inscricao = models.CharField('Situação da Inscrição', max_length=50)
+
+	class Meta:
+		verbose_name = 'Situação da Inscrição'
+		verbose_name_plural = 'Situação da Inscrição'
+
+	def __str__(self):
+		return self.situacao_inscricao
 
 class Inscricao(models.Model):
 	curso_extensao = models.ForeignKey(CursoExtensao, on_delete=models.PROTECT)
 	participante = models.ForeignKey(Participante, on_delete=models.PROTECT)
 	criado = models.DateTimeField(auto_now_add=True)
 	modificado = models.DateTimeField(auto_now=True)
+	situacao_inscricao = models.ForeignKey(SituacaoInscricao, on_delete=models.PROTECT, default=1)
+
 
 	class Meta:
 		verbose_name_plural = 'Inscrições'

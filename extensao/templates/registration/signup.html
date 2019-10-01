@@ -2,10 +2,10 @@
 
 {% block context %}
 
-<div class="row">
+    <div class="row">
             {% if  form.errors %}
 
-                <div class="center red lighten-4 hoverable ">
+                <div class="center red lighten-4 hoverable alerts-p">
                     {{ form.username.errors }}
                     {{ form.password2.errors }}
                 </div>
@@ -15,27 +15,32 @@
 			{% csrf_token %}
 
             <div class="row">
-                <div class="input-field l12 m12 s8 signup">
+                <div class="input-field l12 m12 s8 auth">
                     <i class="material-icons prefix">account_circle</i>
                     {{ form.username }}
                     <label for="id_username">Nome de Usuario</label>
                 </div>
             </div>
             <div class="row">
-                <div class="input-field l12 m12 s8 signup">
+                <div class="input-field l12 m12 s8 auth">
                     <i class="material-icons prefix">vpn_key</i>
                     {{ form.password1 }}
                     <label for="id_password1">Senha</label>
                 </div>
             </div>
             <div class="row">
-                <div class="input-field l12 m12 s8 signup">
+                <div class="input-field l12 m12 s8 auth">
                     <i class="material-icons prefix">check</i>
                     {{ form.password2 }}
                     <label for="id_password2">Confirmação da Senha</label>
                 </div>
             </div>
-			<button class="waves-effect waves-light btn green accent-4 btn-home btn-signup"  type="submit"><i class="material-icons left">arrow_forward</i>Sing up</button>
+
+			<button class="waves-effect waves-light btn green accent-4 btn-home btn-signup"  type="submit">
+                <i class="material-icons left">arrow_forward</i>Sing up</button>
+
         </form>
-</div>
+
+    </div>
+
 {% endblock %}

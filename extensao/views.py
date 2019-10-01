@@ -11,9 +11,10 @@ from django.contrib import messages
 # view da página home
 def home(request):
     cursos = CursoExtensao.objects.all()
-    return render(request, 'extensao/home.html',{'cursos': cursos})
+    return render(request, 'extensao/home.html', {'cursos': cursos})
 
 
+# View Categoria de Cursos
 def novos_cursos(request):
     situacao = Situacao.objects.get(id=1)
     cursos = CursoExtensao.objects.filter(situacao=situacao)
@@ -23,13 +24,15 @@ def novos_cursos(request):
 def inscricoes_abertas(request):
     situacao = Situacao.objects.get(id=2)
     cursos = CursoExtensao.objects.filter(situacao=situacao)
-    return render(request, 'extensao/inscricoes_abertas.html', {'cursos': cursos})
+    return render(request, 'extensao/inscricoes_abertas.html',
+    {'cursos': cursos})
 
 
 def inscricoes_finalizadas(request):
     situacao = Situacao.objects.get(id=3)
     cursos = CursoExtensao.objects.filter(situacao=situacao)
-    return render(request, 'extensao/inscricoes_finalizadas.html', {'cursos': cursos})
+    return render(request, 'extensao/inscricoes_finalizadas.html',
+    {'cursos': cursos})
 
 def concluidos(request):
     situacao = Situacao.objects.get(id=4)
@@ -37,26 +40,29 @@ def concluidos(request):
     return render(request, 'extensao/concluidos.html', {'cursos': cursos})
 
 
+#View Detalhes do Curso
 def detalhes_curso(request, id):
     curso = CursoExtensao.objects.get(pk=id)
     context = {'curso': curso}
     return render(request, 'extensao/detalhes_curso.html', context)
 
 
-#view da página inscrever-se
-def signup(resquest):
-    if resquest.method == 'POST':
-        form = UserCreationForm(resquest.POST)
+#View Cadastrar Usuário
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Cadastro Realizado com Sucesso!', extra_tags='login')
             return redirect('login')
     else:
         form = UserCreationForm()
 
-    return render(resquest, 'registration/signup.html', {'form': form})
+    return render(request, 'registration/signup.html', {'form': form})
 
 
-#view da página alterar senha
+
+#View Alterar Senha
 def alterar_senha(request):
     if request.method == 'POST':
         form = PasswordChangeForm(user=request.user)
@@ -74,6 +80,8 @@ def alterar_senha(request):
     })
 
 
+
+#View em espera...
 def recuperar_senha(request):
     if request.method == 'POST':
         form = PasswordResetForm(user=request.user)
@@ -89,61 +97,25 @@ def recuperar_senha(request):
         'form': form
     })
 
+
+#View Participante (Formulário)
 def participante(request):
-    participante = Participante.objects.all()
-    form = ParticipanteForm
-    data = {'form': form}
-    messages.warning(request, 'Para se inscrever em um curso você deve está cadastrado no sistema! ', extra_tags='cadastro20')
+    usuario = User.objects.get(username=request.user)
+
+    if participante_check(id=usuario.id):
+        #messages.warning(request, 'Você já possui cadastro!', extra_tags='cadastrado1')
+        return redirect('home')
+    else:
+        form = ParticipanteForm
+        data = {'form': form}
+        messages.warning(request, 'Para se inscrever em um curso você deve está cadastrado no sistema!',
+        extra_tags='cadastro20')
     return render(request, 'extensao/cadastro.html', data)
 
 
-def editar(request, id):
-    usuario = User.objects.get(pk=id)
-    editado = Participante.objects.filter(usuario=usuario).first()
-
-    form = EditarParticipanteForm(request.POST or None, instance=editado)
-    if request.method == "POST":
-
-       if form.is_valid():
-            form.save()
-            messages.warning(request, 'Alterado com sucesso! Voltar para a página inicial', extra_tags='editado10')
-
-
-    else:
-        form = EditarParticipanteForm(instance=editado)
-        form.fields["cpf"].widget.attrs['readonly'] = True
-        form.fields["usuario"].widget.attrs['readonly'] = True
-        form.fields["municipio_nascimento"].widget.attrs['readonly'] = True
-
-
-    return render(request, 'extensao/editar.html', {'form':form})
-
-
-
-def participante_check(id):
-    usuario = User.objects.get(pk=id)
-    participante = Participante.objects.filter(usuario=usuario).first()
-    if participante != None:
-        return True
-    else:
-        return False
-
-
-def participante_detalhes(request, id):
-    usuario = User.objects.get(pk=id)
-    participante = Participante.objects.filter(usuario=usuario).first()
-    context = {'participante': participante}
-    if participante_check(id=usuario.id):
-        messages.warning(request, 'Você precisa está logado no sistema!', extra_tags='editado01')
-        return render(request, 'extensao/participante_detalhes.html', context)
-    else:
-        messages.warning(request, 'Realize seu cadastro Aqui!', extra_tags='editado')
-        return redirect('home')
-
-
-
+#View Participante Save (Grava os dados no formulário no BD)
 def participante_save(request):
-    form = ParticipanteForm(request.POST or None)
+    form = ParticipanteForm(request.POST, request.FILES or None)
     usuario = User.objects.get(username=request.user)
     if form.is_valid():
         nome = form.cleaned_data['nome']
@@ -156,6 +128,8 @@ def participante_save(request):
         estado_nascimento = form.cleaned_data['estado_nascimento']
         municipio_nascimento = form.cleaned_data['municipio_nascimento']
         identidade_candidato = form.cleaned_data['identidade_candidato']
+        titulo = form.cleaned_data['titulo']
+        reservista = form.cleaned_data['reservista']
         data_identidade = form.cleaned_data['data_identidade']
         orgao_emissor = form.cleaned_data['orgao_emissor']
         uf_identidade = form.cleaned_data['uf_identidade']
@@ -167,10 +141,10 @@ def participante_save(request):
         estado = form.cleaned_data['estado']
         cidade_endereco = form.cleaned_data['cidade_endereco']
         cep = form.cleaned_data['cep']
-        zona = form.cleaned_data['zona']
         email = form.cleaned_data['email']
         telefone_residencial = form.cleaned_data['telefone_residencial']
         telefone_celular = form.cleaned_data['telefone_celular']
+        foto_perfil = form.cleaned_data['foto_perfil']
 
 
         participante = Participante(
@@ -178,42 +152,118 @@ def participante_save(request):
         responsavel=responsavel, data_nascimento=data_nascimento,
         nacionalidade=nacionalidade, estado_nascimento=estado_nascimento,
         municipio_nascimento=municipio_nascimento, identidade_candidato=
-        identidade_candidato, data_identidade=data_identidade, orgao_emissor=
-        orgao_emissor, uf_identidade=uf_identidade, municipio_identidade=
+        identidade_candidato, titulo=titulo, reservista=reservista, data_identidade=data_identidade,
+        orgao_emissor=orgao_emissor, uf_identidade=uf_identidade, municipio_identidade=
         municipio_identidade, pais_origem=pais_origem, logradouro=logradouro,
         complemento=complemento, bairro=bairro, estado=estado, cidade_endereco=
-        cidade_endereco, cep=cep, zona=zona, email=email, telefone_residencial=
-        telefone_residencial, telefone_celular=telefone_celular
+        cidade_endereco, cep=cep, email=email, telefone_residencial=
+        telefone_residencial, telefone_celular=telefone_celular, foto_perfil=foto_perfil
         )
 
         if participante_check(id=usuario.id):
             messages.warning(request, 'Você já possui cadastro!', extra_tags='cadastrado1')
             return redirect('home')
         else:
-            participante.save()
-            messages.success(request, 'Pronto para realizar inscrição! Selecione um curso!', extra_tags='cadastrado')
+            participante_cpf = Participante.objects.filter(cpf=cpf)
+            if not participante_cpf.exists():
+                participante.save()
+                messages.success(request, 'Pronto para realizar inscrição! Selecione um curso!',
+                                 extra_tags='cadastrado')
+                return redirect('home')
+            else:
+                messages.success(request, 'Existe outro Usuário com esse cpf!', extra_tags='cpf')
+            return render(request, 'extensao/cadastro.html', {'form': form})
+
+
+
+#View Editar Participante (Atualiza os dados da tabela participante no BD)
+def editar(request):
+    usuario = User.objects.get(username=request.user)
+    editado = Participante.objects.filter(usuario=usuario).first()
+
+    form = EditarParticipanteForm(request.POST, request.FILES or None, instance=editado)
+    if request.method == "POST" and "FILES":
+
+       if form.is_valid():
+            form.save()
+            messages.warning(request, 'Alterado com sucesso! Voltar para a página inicial',
+            extra_tags='editado10')
+
+
+    else:
+        form = EditarParticipanteForm(instance=editado)
+        form.fields["cpf"].widget.attrs['readonly'] = True
+        form.fields["usuario"].widget.attrs['readonly'] = True
+        form.fields["municipio_nascimento"].widget.attrs['readonly'] = True
+        form.fields["foto_perfil"].widget.attrs['readonly'] = True
+
+    return render(request, 'extensao/editar.html', {'form': form})
+
+
+
+# View Detalhes do Participante
+def participante_detalhes(request):
+    usuario = User.objects.get(username=request.user)
+    participante = Participante.objects.filter(usuario=usuario).first()
+    context = {'participante': participante}
+    if participante_check(id=usuario.id):
+        messages.warning(request, 'Você precisa está logado no sistema!',
+        extra_tags='editado01')
+        return render(request, 'extensao/participante_detalhes.html', context)
+    else:
+        messages.warning(request, 'Você ainda não está cadastrado! Realize seu cadastro Aqui.', extra_tags='editado')
         return redirect('home')
 
 
+# View Verifica Participante (Verifica se o Usuário autentificado no sistema possui Participante ou seja, está cadastro)
+def participante_check(id):
+    usuario = User.objects.get(pk=id)
+    participante = Participante.objects.filter(usuario=usuario).first()
+    if participante != None:
+        return True
+    else:
+        return False
 
-def confirmar_inscricao(request, id):
+
+# View Minhas Inscrições (Exibi as inscrições já realizadas pelo Participante)
+def minhas_inscricoes(request):
     usuario = User.objects.get(username=request.user)
     if participante_check(id=usuario.id):
-        curso = CursoExtensao.objects.get(pk=id)
         participante = Participante.objects.get(usuario=usuario)
-        curso_extensao = CursoExtensao.objects.get(pk=id)
-        inscricao = Inscricao(participante=participante, curso_extensao=curso_extensao)
-        inscricao_check = Inscricao.objects.filter(participante_id=participante.id, curso_extensao_id=curso_extensao.id)
-        context = {'curso': curso, 'participante': participante}
-        if not inscricao_check.exists():
-            return render(request, 'extensao/confirmar_inscricao.html', context)
+        inscricoes = Inscricao.objects.filter(participante=participante)
+
+        context = {'inscricoes': inscricoes}
+
+        if inscricoes.exists():
+            return render(request, 'extensao/minhas_inscricoes.html', context)
         else:
-            messages.warning(request, 'Você já está inscrito nesse curso!', extra_tags='inscricao1')
+            messages.warning(request, 'Você não está inscrito em nenhum curso! Selecione um curso!',
+            extra_tags='inscricao3')
+            return render(request, 'extensao/detalhes_curso.html', context)
     else:
-        messages.warning(request, ' Seu cadastro ainda não está completo! Clique aqui para concluir cadastro.', extra_tags='inscricao2')
-    return redirect('detalhes_curso', id=id)
+        messages.warning(request, 'Realize seu cadastro Aqui!', extra_tags='editado')
+        return redirect('home')
 
 
+  # View Gerar Comprovante (Exibi o comprovante de cada inscrição realizada pelo Participante)
+def gerar_comprovante(request, id):
+    inscricao = Inscricao.objects.get(pk=id)
+    context = {'inscricao': inscricao}
+    messages.warning(request, 'Você precisa está logado no sistema!',
+    extra_tags='comprovante01')
+    return render(request, 'extensao/gerar_comprovante.html', context)
+
+
+# View Comprovante de Inscrição (Exibi o Comprovante após a confirmação da Inscricão)
+def comprovante_inscricao(request, id):
+    inscricao = Inscricao.objects.get(pk=id)
+    context = {'inscricao': inscricao}
+    messages.warning(request, 'Você precisa está logado no sistema!',
+    extra_tags='comprovante02')
+    return render(request, 'extensao/comprovante_inscricao.html', context)
+
+
+# View Inscrição (Grava os dados na tabela Inscrição)
 def inscricao_save(request, id):
         usuario = User.objects.get(username=request.user)
         curso = CursoExtensao.objects.get(pk=id)
@@ -221,38 +271,34 @@ def inscricao_save(request, id):
         participante = Participante.objects.get(usuario=usuario)
         curso_extensao = CursoExtensao.objects.get(pk=id)
         inscricao = Inscricao(participante=participante, curso_extensao=curso_extensao)
-        inscricao_check = Inscricao.objects.filter(participante_id=participante.id, curso_extensao_id=curso_extensao.id)
+        inscricao_check = Inscricao.objects.filter(participante_id=participante.id,
+        curso_extensao_id=curso_extensao.id)
         if not inscricao_check.exists():
             inscricao.save()
             return redirect('gerar_comprovante', inscricao.id)
         else:
-            messages.warning(request, 'Você já está inscrito nesse curso!', extra_tags='inscricao_save')
+            messages.warning(request, 'Você já está inscrito nesse curso!',
+            extra_tags='inscricao_save')
             return render(request, 'extensao/detalhes_curso.html', context)
 
 
-def gerar_comprovante(request, id):
-    inscricao = Inscricao.objects.get(pk=id)
-    context = {'inscricao': inscricao}
-    messages.warning(request, 'Você precisa está logado no sistema!', extra_tags='comprovante01')
-    return render(request, 'extensao/gerar_comprovante.html', context)
+ # View Confirmar Inscrição (Relaciona os Objetos Participante e Curso na tabela Inscrição do BD)
+def confirmar_inscricao(request, id):
+    usuario = User.objects.get(username=request.user)
+    if participante_check(id=usuario.id):
+        curso = CursoExtensao.objects.get(pk=id)
+        participante = Participante.objects.get(usuario=usuario)
+        curso_extensao = CursoExtensao.objects.get(pk=id)
+        inscricao_check = Inscricao.objects.filter(participante_id=participante.id, curso_extensao_id=curso_extensao.id)
+        context = {'curso': curso, 'participante': participante}
+        if not inscricao_check.exists():
+            return render(request, 'extensao/confirmar_inscricao.html', context)
+        else:
+            messages.warning(request, 'Você já está inscrito nesse curso!',
+            extra_tags='inscricao1')
 
-
-def comprovante_inscricao(request, id):
-    inscricao = Inscricao.objects.get(pk=id)
-    context = {'inscricao': inscricao}
-    messages.warning(request, 'Você precisa está logado no sistema!', extra_tags='comprovante02')
-    return render(request, 'extensao/comprovante_inscricao.html', context)
-
-
-def minhas_inscricoes(request, id):
-    usuario = User.objects.get(pk=id)
-    participante = Participante.objects.get(usuario=usuario)
-
-    inscricoes = Inscricao.objects.filter(participante=participante)
-
-    context = {'inscricoes': inscricoes}
-    if inscricoes.exists():
-        return render(request, 'extensao/minhas_inscricoes.html', context)
+        return redirect('detalhes_curso', id=id)
     else:
-        messages.warning(request, 'Você não está inscrito em nenhum curso! Selecione um curso!', extra_tags='inscricao3')
-    return render(request, 'extensao/detalhes_curso.html', context)
+        messages.warning(request, ' Seu cadastro ainda não está completo! Clique aqui para concluir cadastro.',
+        extra_tags='inscricao2')
+    return redirect('detalhes_curso', id=id)

@@ -1,155 +1,209 @@
+   /* CSS Geral*/
+    body{
+        background-color:#fafafa;
+    }
 
+    footer{
+        margin: 10px 0px -20px 0px;
+    }
 
-
-   /*.title{
-      font-family: Arial, Helvetica, sans-serif;
-      text-shadow: 0px 0px 5px black;
-      color: white;
-   }
-
-   .paragrafo{
-        font-size: 1.2em;
-        color: #212121;
-   }
-
-   .title:hover{
-        color:#212121;
-   }*/
-
-   .h5{
-      text-shadow: 2px 2px 4px #000000;
-   }
-
-   /*.h5:hover{
-        text-shadow:none;
-   }*/
+    p{
+        font-size: 85%;
+    }
 
     .link-b{
         color:white;
     }
 
-    .link-b:hover {
-
-       text-shadow: 2px 2px 4px #000000;
+    .link-a{
+       color:white;
     }
 
-   .link-a{
-       color:white;
-   }
+    .link-d{
+       text-decoration:underline;
+    }
 
-   .link-a:hover {
+    .link-c{
+        color:white;
+        text-decoration: underline;
+    }
+
+    .link-a:hover {
         text-decoration: underline;
         text-shadow: 2px 2px 4px #000000;
-   }
+    }
 
+    .link-b:active {
+        color:black;
+    }
 
-   .siex{
+    /* header - Base */
+    .siex{
         text-shadow: 2px 2px 4px #000000;
-   }
+        margin: 20px 0px 0px 15px;
+    }
 
-   /*.siex:hover{
-        text-shadow: none;
-   }*/
+    /* Body - Base */
+    .body-base{
+        margin-top:1%;
+    }
 
-   @keyframes bemvindo1{
-
-        from { color:white; text-shadow: 1px 1px 2px black, 0 0 25px green, 0 0 5px darkgreen;}
-        to {color:darkgreen;}
-   }
-
-   .bemvindo1{
-        color: white;
-        animation-name: bemvindo1;
-        animation-duration: 120s;
-        animation-delay: 0.01s;
-        animation-iteration-count:241;
-        animation-direction: alternate;
-   }
-
-     @keyframes bemvindo2{
-
-        from { color:blue; text-shadow: 1px 1px 2px black, 0 0 25px black, 0 0 5px darkgreen;}
-        to {color:white;}
-   }
-
-   .bemvindo2{
-        color: blue;
-        animation-name: bemvindo2;
-        animation-duration: 10s;
-        animation-delay: 0.01s;
-        animation-iteration-count:5;
-        animation-direction: alternate;
-   }
-
-   .foto_curso {
-        width: 200px;
-        height: 200px;
-   }
-
-   .bemvindo{
+    .bemvindo{
         color: white;
         text-shadow: 1px 1px 2px black, 0 0 25px green, 0 0 5px darkgreen;
-        margin:2% 0% 0% 77%;
+        margin:6% 0% 2% 26%;
     }
 
     .bemvindo:hover{
         color: darkgreen;
     }
 
+    .separa-base{
+        height:1px;
+        margin-bottom:23px;
+    }
+
+    /* Filter - Base*/
+    .filtro{
+        padding-bottom: 1%;
+    }
+    #filtro-curso{
+        color: white;
+        width: 100%;
+    }
+
+    /* Cards - Home */
+    .foto_curso {
+        width: 200px;
+        height: 200px;
+    }
+
+    #nome-curso{
+        color: #686868;
+        font-weight: bold;
+    }
+
+    #situacao-curso{
+        color: #686868;
+    }
+
+    /* Card - 500*/
+    .card-500{
+        margin:2.5% 0% 2.5% 0%;
+    }
+
+    /* Footer - Base */
+    .footer-h5{
+        text-shadow: 2px 2px 4px #000000;
+    }
+
+    #copy-link{
+       color:white;
+       font-weight: bold;
+    }
+
+    /* Auth */
+    .auth{
+        margin:10% 0% 0% 0%;
+    }
+
+    /* Alerts */
+    .alerts-p{
+        font-size: 12pt;
+    }
+
+    .alerts-link{
+        color:black;
+        text-decoration: underline;
+        font-size: 12pt;
+    }
+
+    /* Botom */
+
    .btn-home:hover{
        opacity:0.9;
        box-shadow: inset 0 0 0 25px green;
    }
 
-    .btn-home-yellow:hover{
-       opacity:0.9;
-       box-shadow: inset 0 0 0 25px yellow;
+   .btn-voltar-alfa{
+        margin:10% 0% 10% 0%;
    }
 
-   .btn-home-red:hover{
-       opacity:0.9;
-       box-shadow: inset 0 0 0 25px red;
+   .btn-voltar-beta{
+       width:100%
    }
 
-   #b{
-        color:#686868;
+   /** Botom Confirmar Inscrição **/
+   #avancar{
+       margin-top:10%;
    }
 
-   .signup{
-        margin:10% 0% 0% 0%;
-   }
-
-   .btn-signup{
-        margin: 0% 0% 10% 6%;
+   /**Botom Detalhes Participantes**/
+    .btn-editar{
+        width:100%;
     }
 
-   .btn-login{
-        margin-left: 6%;
-   }
-
-   .link-cadastro{
-        margin-left: 5%;
-   }
-
+   /** Botom Detalhes Cursos**/
    .btn-cursos{
         margin: 0%;
         width: 100%;
-    }
+   }
 
    .btn-incricao{
         margin: 0%;
         width: 100%;
    }
 
-   .paragrafo-login{
-        margin: 0%;
-        width: 100%;
+   /** Botom Auth**/
+   .btn-signup{
+        margin: 0% 0% 10% 6%;
    }
 
+   .btn-login{
+        margin-left: 6%;
+   }
 
+   /* Links*/
 
- @media screen and (max-width: 480px) {
+   /**Link Auth**/
+   .link-auth{
+       margin-left: 5%;
+       font-size: 16px;
+   }
 
+   /* Table */
+   .table{
+       color: #686868;
+   }
+
+   .table-situacao{
+        font-weight:bold;
+   }
+
+   /* CSS para Tags especificas*/
+   .paragrafo-login{
+       margin: 0%;
+       width: 100%;
+   }
+
+   .msg-login{
+       line-height: 1;
+       font-family: Roboto, sans-serif;
+       font-weight: normal;
+       border-bottom: 1px solid;
+       color: rgba(0,0,0,0.87);
+   }
+
+   #title-h3{
+        color: #fffde7;
+        text-shadow: 0.4px 0.4px black;
+   }
+
+@media screen and (max-width: 600px) {
+
+   .ifpi{
+        margin-top: -1%;
+   }
 
     .siex{
         font-size:13pt;
@@ -159,17 +213,19 @@
         font-size:13pt;
         margin-left: 25px;
     }
+
     .title{
         margin: 0 0 0 0;
         font-size:24pt;
     }
+
     .paragrafo{
         margin: 0 0 0 0;
         font-size:13pt;
     }
 
     .bemvindo{
-        margin: 7% 0% 8% 7%;
+        margin: 7% 0% 8% 0%;
     }
 
     .signup{
@@ -188,16 +244,24 @@
         margin-left: 12%;
     }
 
+    .link-b h5{
+        margin-left:0%;
+    }
+
     .link-b{
         margin-left:58%;
+    }
+
+    p{
+        font-size:90%;
     }
 }
 
 
-@media screen and (min-width: 480px) and (max-width: 960px) {
+@media screen and (min-width: 601px) and (max-width: 991px) {
 
     .bemvindo{
-        margin: 4% 0% 4% 1%;
+        margin: 10% 0% 6% -20%;
     }
 
     .btn-login{
@@ -209,15 +273,26 @@
         margin-top: 5%;
    }
 
+    p{
+     font-size:90%;
+    }
 
+    footer{
+        margin-top:21%;
+    }
 }
 
 
-@media screen and (min-width: 961px) and (max-width: 2000px) {
+@media screen and (min-width: 992px) and (max-width: 1200px) {
     .siex{
         margin:auto;
         width: 90%;
     }
+
+    p{
+         font-size: 65%;
+    }
+
 }
 
 

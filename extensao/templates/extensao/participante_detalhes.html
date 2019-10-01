@@ -1,13 +1,19 @@
 {% extends "extensao/base.html" %}
+
+{% block filtro %}
+
+{% endblock %}
+
 {% block context %}
 
-{% if user.is_authenticated %}
-<div class="row" style="margin-top:10px">
-   <table class=" highlight striped col s10 offset-s1">
-            <tbody>
+
+   {% if user.is_authenticated %}
+   <div class="row">
+
+       <table class=" highlight striped col s10 offset-s1 table">
+           <tbody>
                 <tr>
                     <td>CPF:</td>
-
                     <td>{{ participante.cpf }}</td>
                 </tr>
                 <tr>
@@ -17,12 +23,10 @@
                 </tr>
                 <tr>
                     <td>Sexo:</td>
-
                     <td>{{ participante.sexo }}</td>
                 </tr>
                 <tr>
                     <td>Nome da Mãe:</td>
-
                     <td>{{ participante.nome_mae }}</td>
                 </tr>
                 <tr>
@@ -51,16 +55,23 @@
                     <td>{{ participante.municipio_nascimento }}</td>
                 </tr>
                 <tr>
-                    <td>Identidade do candidato</td>
+                    <td>Identidade do candidato:</td>
 
                     <td>{{ participante.identidade_candidato }}</td>
+                </tr>
+                <tr>
+                    <td>Título de Eleitor:</td>
+                    <td>{{ participante.titulo }}</td>
+                </tr>
+                <tr>
+                    <td>Título de Eleitor:</td>
+                    <td>{{ participante.reservista }}</td>
                 </tr>
                 <tr>
                     <td>Data de Emissão da Identidade:</td>
 
                     <td>{{ participante.data_identidade }}</td>
                 </tr>
-
                 <tr>
                     <td>Órgão Emissor:</td>
 
@@ -111,63 +122,62 @@
 
                     <td>{{ participante.cep }}</td>
                 </tr>
-                 <tr>
-                    <td>Zona:</td>
-
-                    <td>{{ participante.zona }}</td>
-                </tr>
-                 <tr>
+                <tr>
                     <td>E-Mail:</td>
 
                     <td>{{ participante.email }}</td>
                 </tr>
-                 <tr>
+                <tr>
                     <td>Telefone Residencial:</td>
 
                     <td>{{ participante.telefone_residencial }}</td>
                 </tr>
-                 <tr>
+                <tr>
                     <td>Telefone Celular:</td>
 
                     <td>{{ participante.telefone_celular }}</td>
                 </tr>
-            </tbody>
-        </table>
-</div>
+                <tr>
+                    <td>Foto do Perfil:</td>
+
+                    <td>{{ participante.foto_perfil }}</td>
+                </tr>
+           </tbody>
+       </table>
+   </div>
             <!-- botão -->
-        <div class="row">
-            <div class="col l4 m4 s1">
 
-            </div>
-            <div class="col l4 m4 s10">
-                <div class="card-action center">
-                    <a href="{% url 'editar' user.id %}" class="btn-home waves-effect waves-light btn green accent-4 " style="width:100%;"
-                        ><i class="material-icons left">update</i>Editar Dados</a>
-                </div>
+    <div class="row">
+        <div class="col l4 m4 s10 offset-l4 offset-m4 offset-s1">
+            <div class="card-action center">
+                <a href="{% url 'editar'  %}" class="btn-home waves-effect waves-light btn green accent-4 btn-editar"
+                ><i class="material-icons left">update</i>Editar Dados</a>
             </div>
         </div>
-        <div class="row">
-            <div class="col l4 m4 s1">
+    </div>
+    <div class="row">
 
-            </div>
-            <div class="col l4 m4 s10">
-                <div class="card-action center">
-                    <a href="{% url 'home' %}" class="btn-home waves-effect waves-light btn green accent-4 " style="width:100%;"
-                        ><i class="material-icons left">arrow_back</i>Voltar</a>
-                </div>
+        <div class="col l4 m4 s10 offset-l4 offset-m4 offset-s1">
+            <div class="card-action center">
+                <a href="{% url 'home' %}" class="btn-home waves-effect waves-light btn green accent-4 btn-editar"
+                ><i class="material-icons left">arrow_back</i>Voltar</a>
             </div>
         </div>
+    </div>
 
-{% else %}
+    {% else %}
 
     <div class="center red lighten-4 hoverable ">
-    {% for message in messages %}
-        {% if "editado01" in message.tags %}
-            <p  class="{{ message.tags }}">
-                    <a href="{% url 'login' %}" style="color:black; text-decoration: underline;">
-                          {{ message }}</a></p>
-         {%endif%}
-    {% endfor %}
+
+        {% for message in messages %}
+            {% if "editado01" in message.tags %}
+                <p  class="{{ message.tags }}">
+                    <a class="alerts-link" href="{% url 'login' %}">{{ message }}</a></p>
+             {%endif%}
+        {% endfor %}
+
     </div>
-{% endif %}
+
+    {% endif %}
+
 {% endblock %}

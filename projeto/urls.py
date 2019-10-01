@@ -27,3 +27,8 @@ urlpatterns = [
 ]
 
 urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+admin.site.site_header = 'SIEX - Sistema de Extensão'
+admin.site.index_title = 'Administração da Coordenação de Extensão - IFPI'
+admin.site.site_title = 'Seja Bem Vindo ao Sistema de Extensão'

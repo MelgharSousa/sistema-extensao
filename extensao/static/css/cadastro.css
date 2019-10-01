@@ -6,22 +6,17 @@
 .linhas{
     display: flex;
     flex-direction: row;
-    padding-left:36px;
-    padding-top:10px;
-
+    padding:10px 0px 0px 36px;
 }
 
 form{
-    padding-left: 10%;
-    padding-right: 10%;
+    padding: 0% 10% 0% 10%;
 }
-
 
 input, select, button {
     font-family: sans-serif;
     font-size: 1em;
 }
-
 
 .campo {
     margin-bottom: 1em;
@@ -29,71 +24,41 @@ input, select, button {
 }
 
 .campoPais{
-    margin-left:34px;
-    margin-bottom: 1em;
+    margin: 0px 0px 1em 34px;
     width: 48%;
 }
 
-.campoPais label{
-    margin-left: 0px;
-    margin-bottom: 0.2em;
-    color: rgb(87, 87, 87);
-    display: block;
-    margin-bottom: 0.2em;
-    color: rgb(87, 87, 87);
-}
 
-.campoCidade{
-    margin-left:0px;
-    margin-bottom: 1em;
-    width: 50%;
-    margin-bottom: 0.2em;
-    color: rgb(87, 87, 87);
-}
-
-.campotelefone{
-    margin-left:36px;
-    margin-bottom: 1em;
-    width: 48%;
-    margin-bottom: 0.2em;
-    color: rgb(87, 87, 87);
-}
-
-.campo label {
+label{
+    font-size: 0.9em;
+    font-family: sans-serif;
     margin-bottom: 0.2em;
     color: rgb(87, 87, 87);
     display: block;
 }
-
 
 fieldset{
-    padding-right:50px;
-    padding-left:50px;
+    padding:0px 50px 0px 50px;
 }
-
 
 .campo select option {
     padding-right: 1em;
 }
 
-
 .campo input:focus, .campo select:focus, .campo textarea:focus {
     background: rgb(255, 255, 255);
 }
-
 
 input{
     width: 90%;
     border-color: rgba(8, 197, 8, 0.548);
     height: 25px;
     border-radius: 5px;
-
 }
 
 p{
     font-size: 10pt;
 }
-
 
 footer{
     text-align: center;
@@ -107,40 +72,22 @@ footer{
     width: 100%;
     height: 1px;
     background-color: rgb(116, 116, 116);
-
 }
-
-
-.linha{
-    width: 90%;
-    height: 1px;
-    background-color: rgb(116, 116, 116);
-}
-
-
-.espaco_linha{
-    padding-bottom: 5px;
-    padding-left:10%;
-}
-
 
 .btn{
     display: flex;
     flex-direction: row-reverse;
     padding-right: 10%;
     margin-top: 1%;
-
 }
 
 .voltar{
     display: flex;
     justify-content: center;
-    padding-right: 10%;
-    padding-top:15px;
+    padding:15px 10% 0% 0%;
     width:100%;
     margin-bottom: 3%;
 }
-
 
 select{
     width: 90%;
@@ -149,21 +96,15 @@ select{
     border-radius: 5px;
 }
 
-
 legend{
     font-size: 1.0em;
-    font-family: sans-serif;
+    font-family: Roboto, sans-serif;
     padding: 15px 15px;
 }
 
 
-label{
-    font-size: 0.9em;
+.botao{
     font-family: sans-serif;
-}
-
-
-.botao {
     font-size: 1.5em;
     background: rgb(11, 102, 16);
     border: 0;
@@ -175,34 +116,14 @@ label{
     border-radius: 5px;
     width:20%;
     text-align: center;
+    text-decoration:none;
 }
-
 
 .caixab{
     display: flex;
     flex-direction: row-reverse;
-
 }
 
-.botao-link{
-    text-decoration:none;
-    background: rgb(11, 102, 16);
-    border-radius: 5px;
-    color: #FFF;
-    border: 0;
-    padding: 0.2em 0.6em;
-    font-size: 1.5em;
-    box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
-    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-    width:20%;
-    text-align: center;
-}
-
-.botao-link:hover{
-    background: rgb(29, 129, 34);
-    box-shadow: inset 2px 2px 2px rgba(0,0,0,0.2);
-    text-shadow: none;
-}
 
 .botao:hover {
     background: rgb(29, 129, 34);
@@ -210,58 +131,57 @@ label{
     text-shadow: none;
 }
 
-
 .botao, select, label.checkbox {
     cursor: pointer;
 }
 
-
 header{
     display: flex;
     flex-direction: row;
-
 }
 
+.header-h1{
+    width: 60%;
+}
 
-header h1{
+.header-img{
+    width: 40%;
+}
+
+.header-h1 h1{
+    font-family: Roboto, sans-serif;
     padding-top: 50px;
-    padding-left: 50px;
-    font-size: 2.6em;
-    margin-left: 0px;
-
+    font-size: 2.0em;
 }
 
-header img{
+.header-img img{
     width: 165px;
     height: 140px;
-    padding: 10px 10px;
-    margin-left: 218px;
+    margin-left:57%;
 }
 
-
 #menssagem{
-    margin: 1% 0% 0% 33%;
+    font-family: "Roboto", sans-serif;
+    font-size: 1.5em;
+    text-align:center;
+    margin: 1% 0% 0% 0%;
     padding:1% 0% 1% 0%;
-
 }
 
 .divmenssagem{
     height:10%;
     width: 100%;
     background:#32CD32;
-    margin-bottom:1%;
-    margin-top:-1%;
+    margin:-1% 0% 1% 0%;
 }
 
 .link {
     height:21px;
     width: 100%;
     background:#FFCDD2;
-    margin-bottom:2%;
-    margin-top:2%;
+    margin: 2% 0% 2% 2%;
     text-align:center;
 }
-
 
 .link a{
    font-size: 14px;
@@ -272,7 +192,6 @@ header img{
    line-height:1.5;
 }
 
-
 .link:hover {
     transition:box-shadow .25s;
     box-shadow:0;
@@ -280,19 +199,21 @@ header img{
     box-shadow:0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
-
 span{
     color: red;
 }
 
+#alert-cpf{
+     color:red;
+}
 
-@media screen and (max-width: 480px) {
-    header {
-      width: 100%;
-      margin-top: 0;
+.alerts-link{
+   color:black;
+}
 
-    }
 
+
+@media screen and (max-width: 600px) {
     .p{
         text-align: center;
         font-size: 1.1em;
@@ -300,24 +221,16 @@ span{
         padding-left: 5%;
     }
 
-    header{
-        width: 100%;
+    .header-h1 h1{
+        font-size: 0.8em;
+        margin-top: -8%;
     }
 
-    header h1{
-        font-size: 1.2em;
-        padding-top: 40px;
-        padding-left: 0px;
-        padding-right: 10%;
-        text-align: center;
-        margin-left: -18px;
+    .header-img img{
+        margin-left: 16%;
+        height: 95px;
+        width: 116px;
     }
-
-    header img{
-        margin-left: 1px;
-        height: 110px;
-    }
-
 
     label{
         font-size: 1.1;
@@ -329,8 +242,8 @@ span{
         flex-direction: column;
         padding-left: 10px;
         margin-left:0px;
-
     }
+
     .campo {
         margin-bottom: 1em;
         width: 80%;
@@ -343,7 +256,6 @@ span{
 
     input{
         width: 120%;
-
     }
 
     select {
@@ -365,7 +277,7 @@ span{
 
     #menssagem{
         font-size:8pt;
-        margin: 1% 0% 0% 7%;
+        margin: 1% 0% 0% 0%;
     }
 
     .divmenssagem{
@@ -388,52 +300,41 @@ span{
         width:42%;
         margin-top:1%;
     }
-
 }
 
-@media screen and (min-width: 480px) and (max-width: 960px) {
+@media screen and (min-width: 601px) and (max-width: 991px) {
     .linhas{
         display: flex;
         flex-direction: column;
-
     }
+
     .campo {
         margin-bottom: 1em;
         width: 100%;
     }
 
+   .header-h1 h1{
+        font-size:1.3em;
+   }
 
-    header h1{
-        font-size: 1.3em;
-        padding-top: 40px;
-        padding-left: 0;
-        padding-right: 10%;
-        text-align: center;
-        margin-left: 0px;
-    }
+   .header-img img{
+       margin-left:28%;
+   }
 
-   header img{
-        padding: 10px 0 0 0;
-        margin-left:137px;
-    }
-
-    .p{
+   .p{
         font-family: sans-serif;
-        padding-top: 20px;
-        padding-bottom: 5px;
         font-size: 1em;
-        padding-left: 5%;
+        padding: 20px 0px 5px 5%;
         margin-left:0px;
-
     }
+
     .campoPais {
-        margin-left: 34px;
-        margin-bottom: 1em;
+        margin:0px 0px 1em 34px;
         width: 93.5%;
     }
 
     #menssagem{
-         margin: 1% 0% 0% 24%;
+         margin: 1% 0% 0% 0%;
          font-size:11pt;
     }
 
@@ -443,5 +344,18 @@ span{
 
     .voltar{
         padding-right: 0%;
+    }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1200px){
+     header h1{
+        font-size: 2.0em;
+        padding: 40px 20% 0% 0%;
+        text-align: center;
+        margin-left: 5%;
+    }
+
+   header img{
+        margin-left: 7%;
     }
 }

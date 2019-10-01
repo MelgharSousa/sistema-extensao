@@ -11,25 +11,30 @@
     <title>Cadastro</title>
 </head>
 <body>
+
     <div class="divmenssagem">
-            {% for message in messages %}
-                {% if "cadastro20" in message.tags %}
+
+        {% for message in messages %}
+            {% if "cadastro20" in message.tags %}
                 <h4  class="{{ message.tags }}" id="menssagem">
                     {{ message }}
                 </h4>
-                {%endif%}
-            {% endfor %}
+            {% endif %}
+        {% endfor %}
     </div>
+
     <header>
-
+        <div class="header-img">
             <img src="/media/copy2_of_topo_ifpi_angical.png" alt="">
-
-
-            <h1>Instituto Federal do Piauí - IFPI</h1>
-
+        </div>
+        <div class="header-h1">
+             <h1>Instituto Federal do Piauí - IFPI</h1>
+        </div>
     </header>
+
     {% if user.is_authenticated %}
-    <form action="{% url 'participante_save' %}" method="POST">
+
+    <form action="{% url 'participante_save' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <!-- dados usuario -->
 
@@ -37,163 +42,176 @@
 
             <legend class="p">Dados Pessoais - Campos com <span>*</span> são obrigatórios</legend>
 
-        <div class="linhas">
-            <div class="campo">
-                <label for="cpf"><span>*</span>CPF</label>
-                 {{ form.cpf }}
-            </div>
-            <div class="campo">
-                <label for="nome"><span>*</span>Nome Completo</label>
-                {{ form.nome }}
-            </div>
-        </div>
+                <div class="linhas">
+                    <div class="campo">
 
-        <div class="linhas">
-            <div class="campo">
-                <label for="nome"><span>*</span>Sexo</label>
-                {{ form.sexo }}
-                <p>informar sexo descrito no documento oficial de identificação.</p>
-            </div>
-            <div class="campo">
-                <label for="nome"><span>*</span>Filiação - Nome da Mãe</label>
-                {{ form.nome_mae }}
-                <p>informar nome do(a) responsável legal.</p>
-            </div>
-        </div>
+                         {% for message in messages %}
+                                {% if "cpf" in message.tags %}
+                            <p id="alert-cpf" class="{{ message.tags }}"> {{ message }}</p>
+                                {% endif %}
+                        {% endfor %}
 
-        <div class="linhas">
-            <div class="campo">
-                <label for="nome"><span>*</span>Filiação - Outro Responsável</label>
-                {{ form.responsavel }}
-                <p>informar nome do(a) responsável legal.</p>
-            </div>
-            <div class="campo">
-                <label for="nome"><span>*</span>Data de Nascimento</label>
-                {{ form.data_nascimento }}
-            </div>
-        </div>
-
-        <div class="linhas">
-            <div class="campo">
-                <label for="nome"><span>*</span>Nacionalidade</label>
-                {{ form.nacionalidade }}
-            </div>
-            <div class="campo">
-                <label for="email"><span>*</span>Estado</label>
-                {{ form.estado_nascimento }}
-            </div>
-        </div>
-
-        <div class="linhas">
-            <div class="campo">
-                <label for="nome"><span>*</span>Município de Nascimento</label>
-                {{ form.municipio_nascimento }}
-            </div>
-            <div class="campo">
-                <label for="nome"><span>*</span>Identidade do candidato</label>
-                {{ form.identidade_candidato }}
-            </div>
-        </div>
-
-        <div class="linhas">
-            <div class="campo">
-                    <label for="nome"><span>*</span>Data de Emissão Identidade</label>
-                    {{ form.data_identidade }}
-            </div>
-            <div class="campo">
-                <label for="nome"><span>*</span>Órgão Emissor</label>
-                {{ form.orgao_emissor }}
-            </div>
-        </div>
-
-        <div class="linhas">
-            <div class="campo">
-                <label for="email"><span>*</span>UF da Identidade</label>
-                {{ form.uf_identidade }}
-            </div>
-            <div class="campo">
-                <label for="nome"><span>*</span>Município da Identidade</label>
-               {{ form.municipio_identidade }}
-            </div>
-        </div>
-        <div class="campoPais">
-            <label for="nome">País de Origem</label>
-            {{ form.pais_origem }}
-            <p>Apenas preencha este campo caso não tenha nascido no Brasil.</p>
-        </div>
-    </fieldset>
-
-        <!-- endereço -->
-    <fieldset>
-
-                <legend class="p">Endereço do Candidato*</legend>
-
-        <div class="linhas">
-            <div class="campo">
-                <label for="nome"><span>*</span>Logadouro</label>
-                {{ form.logradouro }}
-                <p>Nome da rua.</p>
-            </div>
-            <div class="campo">
-                <label for="nome">Complemento</label>
-                {{ form.complemento }}
-            </div>
-        </div>
-
-        <div class="linhas">
-                <div class="campo">
-                    <label for="nome"><span>*</span>Bairro</label>
-                    {{ form.bairro }}
+                        <label for="id_cpf"><span>*</span>CPF</label>
+                         {{ form.cpf }}
+                    </div>
+                    <div class="campo">
+                        <label for="id_nome"><span>*</span>Nome Completo</label>
+                        {{ form.nome }}
+                    </div>
                 </div>
-            <div class="campo">
-                <label for="email"><span>*</span>Estado</label>
-                {{ form.estado }}
-            </div>
-        </div>
 
-        <div class="linhas">
-                <div class="campo">
-                    <label for="nome"><span>*</span>CEP</label>
-                    {{ form.cep }}
+                <div class="linhas">
+                    <div class="campo">
+                        <label for="id_sexo"><span>*</span>Sexo</label>
+                        {{ form.sexo }}
+                        <p class="abc">informar sexo descrito no documento oficial de identificação.</p>
+                    </div>
+                    <div class="campo">
+                        <label for="id_nome_mae"><span>*</span>Filiação - Nome da Mãe</label>
+                        {{ form.nome_mae }}
+                        <p>informar nome do(a) responsável legal.</p>
+                    </div>
                 </div>
-            <div class="campo">
-                <label for="email"><span>*</span>ZONA</label>
-                {{ form.zona }}
-            </div>
-        </div>
 
-        <div class="linhas">
-            <div class="campo">
-                <label for="nome"><span>*</span>Cidade deste endereço</label>
-                {{ form.cidade_endereco }}
-            </div>
+                <div class="linhas">
+                    <div class="campo">
+                        <label for="id_responsavel"><span>*</span>Filiação - Outro Responsável</label>
+                        {{ form.responsavel }}
+                        <p>informar nome do(a) responsável legal.</p>
+                    </div>
+                    <div class="campo">
+                        <label for="id_data_nascimento"><span>*</span>Data de Nascimento</label>
+                        {{ form.data_nascimento }}
+                    </div>
+                </div>
 
-        </div>
+                <div class="linhas">
+                    <div class="campo">
+                        <label for="id_nacionalidade"><span>*</span>Nacionalidade</label>
+                        {{ form.nacionalidade }}
+                    </div>
+                    <div class="campo">
+                        <label for="id_estado_nascimento"><span>*</span>Estado</label>
+                        {{ form.estado_nascimento }}
+                    </div>
+                </div>
 
-    </fieldset>
+                <div class="linhas">
+                    <div class="campo">
+                        <label for="id_municipio_nascimento"><span>*</span>Município de Nascimento</label>
+                        {{ form.municipio_nascimento }}
+                    </div>
+                    <div class="campo">
+                        <label for="id_identidade_candidato"><span>*</span>Identidade do candidato</label>
+                        {{ form.identidade_candidato }}
+                    </div>
+                </div>
+                <div class="linhas">
+                    <div class="campo">
+                        <label for="id_titulo"><span>*</span>Titulo de Eleitor</label>
+                        {{ form.titulo }}
+                    </div>
+                    <div class="campo">
+                        <label for="id_reservista"><span>*</span>Carteira de Reservista</label>
+                        {{ form.reservista }}
+                    </div>
+                </div>
 
-    <fieldset>
-        <!-- contato -->
+                <div class="linhas">
+                    <div class="campo">
+                            <label for="id_data_identidade"><span>*</span>Data de Emissão Identidade</label>
+                            {{ form.data_identidade }}
+                    </div>
+                    <div class="campo">
+                        <label for="id_orgao_emissor"><span>*</span>Órgão Emissor</label>
+                        {{ form.orgao_emissor }}
+                    </div>
+                </div>
+
+                <div class="linhas">
+                    <div class="campo">
+                        <label for="id_uf_identidade"><span>*</span>UF da Identidade</label>
+                        {{ form.uf_identidade }}
+                    </div>
+                    <div class="campo">
+                        <label for="id_municipio_identidade"><span>*</span>Município da Identidade</label>
+                       {{ form.municipio_identidade }}
+                    </div>
+                </div>
+                <div class="campoPais">
+                    <label for="id_pais_origem">País de Origem</label>
+                    {{ form.pais_origem }}
+                    <p>Apenas preencha este campo caso não tenha nascido no Brasil.</p>
+                </div>
+        </fieldset>
+
+            <!-- endereço -->
+        <fieldset>
+
+            <legend class="p">Endereço do Candidato</legend>
+
+                <div class="linhas">
+                    <div class="campo">
+                        <label for="id_logradouro"><span>*</span>Logadouro</label>
+                        {{ form.logradouro }}
+                        <p>Nome da rua.</p>
+                    </div>
+                    <div class="campo">
+                        <label for="id_complemento">Complemento</label>
+                        {{ form.complemento }}
+                    </div>
+                </div>
+
+                <div class="linhas">
+                        <div class="campo">
+                            <label for="id_bairro"><span>*</span>Bairro</label>
+                            {{ form.bairro }}
+                        </div>
+                        <div class="campo">
+                            <label for="id_estado"><span>*</span>Estado</label>
+                            {{ form.estado }}
+                        </div>
+                </div>
+
+                <div class="linhas">
+                        <div class="campo">
+                            <label for="id_cep"><span>*</span>CEP</label>
+                            {{ form.cep }}
+                        </div>
+                        <div class="campo">
+                        <label for="id_cidade_endereco"><span>*</span>Cidade deste endereço</label>
+                            {{ form.cidade_endereco }}
+                        </div>
+                </div>
+
+
+        </fieldset>
+
+        <fieldset>
+            <!-- contato -->
 
             <legend class="p">Contato do Candidato</legend>
 
 
-        <div class="linhas">
-            <div class="campo">
-                <label for="nome"><span>*</span>E-Mail</label>
-                {{ form.email }}
+            <div class="linhas">
+                <div class="campo">
+                    <label for="id_email"><span>*</span>E-Mail</label>
+                    {{ form.email }}
+                </div>
+                <div class="campo">
+                    <label for="id_telefone_residencial">Telefone Residencial</label>
+                    {{ form.telefone_residencial }}
+                </div>
             </div>
-            <div class="campo">
-                <label for="nome"><span>*</span>Telefone Residencial</label>
-                {{ form.telefone_residencial }}
+            <div class="campoPais">
+                <label for="id_telefone_celular"><span>*</span>Telefone Celular</label>
+                {{ form.telefone_celular }}
             </div>
-        </div>
-
-        <div class="campoPais">
-            <label for="nome"><span>*</span>Telefone Celular</label>
-            {{ form.telefone_celular }}
-        </div>
-     </fieldset>
+            <div class="campoPais">
+                <label for="id_foto_perfil">Foto</label>
+                {{ form.foto_perfil }}
+            </div>
+    </fieldset>
 
         <!-- botão -->
         <div class="btn">
@@ -201,7 +219,28 @@
         </div>
     </form>
 
+    <hr>
 
+     <div class="voltar">
+             <a class="botao" href= "{% url 'home' %}">Voltar</a>
+     </div>
+
+    {% else %}
+
+    <div class="link">
+        <a href="{% url 'login' %}">Você precisa está logado no sistema</a>
+    </div>
+
+    {% endif %}
+
+    <footer>
+
+        <div class="footer">
+            <div class="linhaf"></div>
+            <p class="p">Instituto Federal de Educação, Ciência e Tecnologia do Piauí (IFPI), Reitoria, Angical (PI)</p>
+        </div>
+
+    </footer>
     <script type="text/javascript">
         $(document).ready(function () {
         $('#id_data_nascimento').mask('99/99/9999');
@@ -211,26 +250,6 @@
         });
     </script>
 
-    <hr style="color:green; height: 2px; margin: 0% 0% 1% 0%;">
-
-     <div class="voltar">
-             <a class="botao-link" href= "{% url 'home' %}">Voltar</a>
-     </div>
-    {% else %}
-
-    <div class="link">
-        <a href="{% url 'login' %}">Você precisa está logado no sistema</a>
-    </div>
-
-    {% endif %}
-    <footer>
-        <div class="footer">
-            <div class="linhaf"></div>
-            <p class="p">Instituto Federal de Educação, Ciência e Tecnologia do Piauí (IFPI), Reitoria, Angical (PI)</p>
-        </div>
-    </footer>
-
-
-
 </body>
+
 </html>

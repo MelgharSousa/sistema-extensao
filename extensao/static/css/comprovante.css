@@ -1,0 +1,22 @@
+.header-comprovante{
+   margin-top:1%;
+}
+.separa-comprovante{
+   height:1px;
+   margin-bottom:10px;
+}
+.comprovante{
+    margin-top:10px;
+}
+
+.alert-comprovante{
+    color:black;
+    text-decoration: underline;
+    font-size: 12pt;
+}
+
+ @media screen and (max-width: 600px) {
+    .ifpi{
+        margin-top:-1%;
+    }
+ }

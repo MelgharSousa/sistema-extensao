@@ -5,12 +5,14 @@ from .models import (
     CursoExtensao,
     Inscricao,
     EquipeParticipante,
-    Situacao
+    Situacao,
+    SituacaoInscricao,
+    Arquivo
 )
 
 class CursoExtensaoAdmin(admin.ModelAdmin):
-    list_display = ('nome_curso', 'id', 'criado', 'modificado', 'status',)
-    list_filter = ('nome_curso', 'status')
+    list_display = ('nome_curso', 'id', 'situacao', 'criado', 'modificado',)
+    list_filter = ('nome_curso', 'situacao',)
     search_fields = ('id', 'nome_curso')
 
 
@@ -22,13 +24,16 @@ class ParticipanteAdmin(admin.ModelAdmin):
 
 class InscricaoAdmin(admin.ModelAdmin):
 
-    list_display = ('participante','id', 'curso_extensao', 'criado', 'modificado',)
-    list_filter = ('curso_extensao',)
-    search_fields = ('id','participante')
-
+    list_display = ('participante', 'id', 'curso_extensao', 'criado', 'modificado', 'situacao_inscricao')
+    list_filter = ('curso_extensao', 'situacao_inscricao')
+    search_fields = ('id', 'participante')
 
 admin.site.register(EquipeParticipante)
 admin.site.register(CursoExtensao, CursoExtensaoAdmin)
 admin.site.register(Participante, ParticipanteAdmin)
 admin.site.register(Situacao)
+admin.site.register(SituacaoInscricao)
+admin.site.register(Arquivo)
 admin.site.register(Inscricao, InscricaoAdmin)
+
+

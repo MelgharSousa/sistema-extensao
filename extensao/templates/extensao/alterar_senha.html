@@ -4,7 +4,7 @@
 
 {% if user.is_authenticated %}
 
-<div class="row">
+    <div class="row">
             {% if messages %}
                  <div class="center red lighten-4 hoverable ">
             {% for message in messages %}
@@ -38,17 +38,17 @@
                     <label for="id_new_password2">Confirmar Nova Senha</label>
                 </div>
             </div>
-			<button class="btn-home waves-effect waves-light btn green accent-4" style="margin-left:11px;" type="submit"><i class="material-icons left">update</i>Alterar minha senha</button>
+
+			<button class="btn-home waves-effect waves-light btn green accent-4" style="margin-left:11px;" type="submit">
+                <i class="material-icons left">update</i>Alterar minha senha</button>
         </form>
-</div>
+    </div>
 {% else %}
-         <div class="center red lighten-4 hoverable" >
-            <p><a href="{% url 'login' %}" style="line-height: 1;
-                font-family: Roboto, sans-serif;
-                font-weight: normal;
-                border-bottom: 1px solid;
-                color: rgba(0,0,0,0.87);">Você precisa está logado no sistema</a></p>
+
+<div class="center red lighten-4 hoverable" >
+            <p><a href="{% url 'login' %}" class="msg-login">Você precisa está logado no sistema</a></p>
          </div>
 
 {% endif %}
+
 {% endblock %}
