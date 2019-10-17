@@ -33,6 +33,10 @@
         text-shadow: 2px 2px 4px #000000;
     }
 
+    .link-b:hover{
+       font-weight:bold;
+    }
+
     .link-b:active {
         color:black;
     }
@@ -202,11 +206,15 @@
 @media screen and (max-width: 600px) {
 
    .ifpi{
-        margin-top: -1%;
-   }
+        margin: -1% 0% 0% 5%;
+    }
 
     .siex{
         font-size:13pt;
+    }
+
+    .right{
+        margin-left:5%;
     }
 
     .bemvindo{
@@ -255,13 +263,22 @@
     p{
         font-size:90%;
     }
+
+    .btn-voltar-alfa{
+        margin:10% 0% 1% 0%;
+        width: 100%;
+    }
+
+    #avancar{
+        width:100%;
+    }
 }
 
 
 @media screen and (min-width: 601px) and (max-width: 991px) {
 
     .bemvindo{
-        margin: 10% 0% 6% -20%;
+        margin: 10% 0% 6% -30%;
     }
 
     .btn-login{

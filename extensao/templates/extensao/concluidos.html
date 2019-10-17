@@ -3,4 +3,25 @@
 
     {% include 'extensao/filtro.html'%}
 
+    {% if  curso.situacao.id != 4 %}
+
+        <div class="row">
+
+            <div class="col s12 m6 l12" style="margin:2.5% 0% 2.5% 0%;">
+
+                <div class="card hoverable">
+
+                    <div class="card-content grey-text center">
+                        <h4>Não há cursos nessa categoria!</h4>
+                    </div>
+
+                    <div class="card-action center"></div>
+
+                </div>
+
+            </div>
+        </div>
+
+    {% endif %}
+
 {% endblock %}
