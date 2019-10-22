@@ -11,15 +11,19 @@ urlpatterns = [
 
     # View Categoria de Cursos
     path('novos_cursos', views.novos_cursos, name='novos_cursos'),
+    #path('cursos', views.cursos, name='cursos'),
+    #path('monitoria', views.monitoria, name='monitoria'),
     path('inscricoes_abertas', views.inscricoes_abertas,
          name='inscricoes_abertas'),
     path('inscricoes_finalizadas', views.inscricoes_finalizadas,
          name='inscricoes_finalizadas'),
     path('concluidos', views.concluidos, name='concluidos'),
+    path('categoria', views.categoria, name='categoria'),
+
 
     #View Detalhes do Curso
-    path('detalhes_curso/<int:id>/', views.detalhes_curso,
-         name='detalhes_curso'),
+    path('detalhes_oferta/<int:id>/', views.detalhes_oferta,
+         name='detalhes_oferta'),
 
 
     #---- Área do Usuário ----

@@ -2,6 +2,89 @@
 
 {% block context %}
 
-    {% include 'extensao/filtro.html'%}
+    <div class="center green lighten-4 hoverable ">
+        {% for message in messages %}
+            {% if "cadastrado" in message.tags %}
+                <p class="{{ message.tags }} alerts-p">{{ message }}</p>
+            {%endif%}
+        {% endfor %}
+     </div>
+
+    <div class="center green lighten-4 hoverable ">
+        {% for message in messages %}
+            {% if "cadastrado1" in message.tags %}
+                <p class="{{ message.tags }} alerts-p">{{ message }}</p>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <div class="center red lighten-4 hoverable ">
+        {% for message in messages %}
+            {% if "editado" in message.tags %}
+                <p  class="{{ message.tags }} " >
+                    <a class="alerts-link" href="{% url 'participante' %}">
+                          {{ message }}</a></p>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <div class="center red lighten-4 hoverable ">
+        {% for message in messages %}
+            {% if "filtro" in message.tags %}
+                <p  class="{{ message.tags }} alerts-p">{{ message }}</p>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="row green darken-3">
+
+
+        <form method="get" action="{% url 'categoria' %}">
+
+            <div class="col l2 s8 m6 offset-l9 offset-m4">
+                <select name="cat" class="browser-default green darken-4 white-text center">
+                    <option value="">Ofertas</option>
+                    <option value="1">Cursos de Extensão</option>
+                    <option value="2">Monitoria</option>
+                </select>
+            </div>
+            <div class="col l1 s4 m2">
+                 <button class="btn waves-effect waves-light green darken-4 btn-filtro center"  type="submit">Filtrar</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="row">
+
+        {% for oferta in ofertas %}
+        <div class="col s12 m6 l3 xl3 ">
+
+            <div class="card hoverable">
+
+                <div class="card-image responsive-img">
+                    <img   src="{{ oferta.foto_oferta.url }}" class="foto_curso">
+                </div>
+
+                <div class="card-content grey-text">
+                    <p id="nome-curso">{{ oferta.nome_oferta }}</p>
+                    <p>Data Início: {{ oferta.data_inicio  }}</p>
+                    <p>Data Final: {{ oferta.data_final }}</p>
+                    <p>Carga Horária: {{ oferta.carga_horaria}} horas</p>
+                    <p id="situacao-curso">Situação: {{ oferta.situacao }}</p>
+                </div>
+
+                <div class="card-action center">
+                    <a class="waves-effect waves-light btn  btn-home #1b5e20 green darken-4"
+                     href="{% url 'detalhes_oferta' oferta.id %}"><i class="material-icons left">description</i>Detalhes</a>
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+
 
 {% endblock %}

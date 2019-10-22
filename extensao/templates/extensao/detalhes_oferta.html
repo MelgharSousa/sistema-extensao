@@ -29,15 +29,16 @@
 
     <div class="row">
         <div class="col l10 m10 s10 offset-l1 offset-m1 offset-s1">
-            <h5 class="center table"> Descrição do Curso: {{ curso.nome_curso }}</h5>
-            <p class="black-text">{{ curso.resumo_curso }}</p>
+            <h5 class="center table"> Descrição da Oferta: {{ oferta.nome_oferta }}</h5>
+            <p class="black-text">{{ oferta.resumo_oferta }}</p>
         </div>
     </div>
 
     <div class="row">
-         {% for arquivo in curso.arquivo.all %}
+         {% for arquivo in oferta.arquivo.all %}
         <div class="col l10 m10 s10 offset-l1 offset-m1 offset-s1 ">
-             <a class="link-d" href="{{ arquivo.arquivo.url }}" target="_blank">{{ arquivo }}</a>
+             <i class="material-icons left blue-text">description</i>
+            <a class="link-d" href="{{ arquivo.arquivo.url }}" target="_blank">{{ arquivo }} - {{ arquivo.criado}}</a>
         </div>
          {% endfor %}
     </div>
@@ -46,61 +47,51 @@
             <table class=" highlight striped col s10 offset-s1 table">
                 <tbody>
                     <tr>
-                        <td>Nome do Curso:</td>
+                        <td>Nome da Oferta:</td>
 
-                        <td>{{ curso.nome_curso }}</td>
-                    </tr>
-                    <tr>
-                        <td>Área Temática:</td>
-
-                        <td>{{ curso.area_tematica }}</td>
+                        <td>{{ oferta.nome_oferta }}</td>
                     </tr>
                     <tr>
                         <td>Período de realização:</td>
 
-                        <td>{{ curso.data_inicio }} a {{ curso.data_final }}</td>
+                        <td>{{ oferta.data_inicio }} a {{ oferta.data_final }}</td>
                     </tr>
                     <tr>
                         <td>Período de inscrições: </td>
 
-                        <td>{{ curso.data_inscricoes_inicial }} a {{ curso.data_inscricoes_final}}</td>
+                        <td>{{ oferta.data_inscricoes_inicial }} a {{ oferta.data_inscricoes_final}}</td>
                     </tr>
                     <tr>
                         <td>Área de Conhecimento:</td>
 
-                        <td>{{ curso.area_conhecimento }}</td>
-                    </tr>
-                    <tr>
-                        <td>Tema:</td>
-
-                        <td>{{ curso.tema }}</td>
+                        <td>{{ oferta.area_conhecimento }}</td>
                     </tr>
                     <tr>
                         <td>Vagas Participantes:</td>
 
-                        <td>{{ curso.vagas_participantes }}</td>
+                        <td>{{ oferta.vagas_participantes }}</td>
                     </tr>
                     <tr>
                         <td>Público Alvo:</td>
 
-                        <td>{{ curso.publico_alvo }}</td>
+                        <td>{{ oferta.publico_alvo }}</td>
                     </tr>
                     <tr>
                         <td>Carga Horária:</td>
 
-                        <td>{{ curso.carga_horaria }} horas</td>
+                        <td>{{ oferta.carga_horaria }} horas</td>
                     </tr>
                     <tr>
                         <td>Turno:</td>
 
-                        <td>{{ curso.turno }}</td>
+                        <td>{{ oferta.turno }}</td>
                     </tr>
                     <tr>
                         <td>Périodo Letivo:</td>
 
-                        <td>{{ curso.periodo_letivo }}</td>
+                        <td>{{ oferta.periodo_letivo }}</td>
                     </tr>
-                        {% for equipe in curso.equipe_participante.all %}
+                        {% for equipe in oferta.equipe_participante.all %}
                     <tr>
                         <td>Equipe:</td>
                         <td>
@@ -112,19 +103,19 @@
                     <tr>
                         <td>Situação:</td>
 
-                        <td id="nome-curso">{{ curso.situacao }}</td>
+                        <td id="nome-curso">{{ oferta.situacao }}</td>
                     </tr>
                 </tbody>
             </table>
     </div>
 
-        {% if curso.situacao.id == 2 %}
+        {% if oferta.situacao.id == 2 %}
 
                 {% if user.is_authenticated %}
 
                     <div class="row">
                         <div class="col l4 m4 s10 offset-l4 offset-m4 offset-s1">
-                            <a href="{% url 'confirmar_inscricao' curso.id %}"
+                            <a href="{% url 'confirmar_inscricao' oferta.id %}"
                             class=" btn-home btn-incricao waves-effect waves-light btn green accent-4">
                             <i class="material-icons left">description</i>Realizar Pré-Inscrição</a>
                         </div>
@@ -139,22 +130,22 @@
                     </div>
                 {% endif %}
 
-        {% elif curso.situacao.id == 1 %}
+        {% elif oferta.situacao.id == 1 %}
 
             <div class="center red lighten-4 hoverable ">
                 <p class="alerts-p"> As inscrições para este curso ainda não estão disponíveis! </p>
             </div>
 
-        {% elif curso.situacao.id == 3 %}
+        {% elif oferta.situacao.id == 3 %}
 
             <div class="center red lighten-4 hoverable" >
                 <p class="alerts-p"> Inscrições encerradas! </p>
             </div>
 
-        {% elif curso.situacao.id == 4 %}
+        {% elif oferta.situacao.id == 4 %}
 
             <div class="center red lighten-4 hoverable" >
-                <p class="alerts-p">Este curso não está mais disponível. Concluído em: {{ curso.data_final }}. </p>
+                <p class="alerts-p">Este curso não está mais disponível. Concluído em: {{ oferta.data_final }}. </p>
             </div>
 
         {% endif %}
@@ -163,7 +154,7 @@
                 <div class="col l4 m4 s10 offset-l4 offset-m4 offset-s1">
 
                     <a href="{% url 'home' %}" class=" btn-home btn-cursos waves-effect waves-light btn green accent-4 ">
-                        <i class="material-icons left">description</i>Listar Cursos</a>
+                        <i class="material-icons left">description</i>Listar Ofertas</a>
                 </div>
 
             </div>

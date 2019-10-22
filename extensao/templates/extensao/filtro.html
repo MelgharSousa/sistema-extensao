@@ -47,7 +47,7 @@
 
      <div class="row">
 
-        {% for curso in cursos %}
+        {% for oferta in ofertas %}
 
 
         <div class="col s12 m6 l3 xl3 ">
@@ -55,19 +55,19 @@
             <div class="card hoverable">
 
                 <div class="card-image responsive-img">
-                    <img   src="{{ curso.foto_curso.url }}" class="foto_curso">
+                    <img   src="{{ oferta.foto_oferta.url }}" class="foto_curso">
                 </div>
 
                 <div class="card-content grey-text">
-                    <p id="nome-curso">Curso: {{ curso.nome_curso }}</p>
-                    <p>Data Início: {{ curso.data_inicio  }}</p>
-                    <p>Data Final: {{ curso.data_final }}</p>
-                    <p>Carga Horária: {{ curso.carga_horaria}} horas</p>
-                    <p id="situacao-curso">Situação: {{ curso.situacao }}</p>
+                    <p id="nome-curso">{{ oferta.nome_oferta }}</p>
+                    <p>Data Início: {{ oferta.data_inicio  }}</p>
+                    <p>Data Final: {{ oferta.data_final }}</p>
+                    <p>Carga Horária: {{ oferta.carga_horaria}} horas</p>
+                    <p id="situacao-curso">Situação: {{ oferta.situacao }}</p>
                 </div>
 
                 <div class="card-action center"><a class="waves-effect waves-light btn  btn-home #1b5e20 green darken-4"
-                     href="{% url 'detalhes_curso' curso.id %}"><i class="material-icons left">description</i>Detalhes</a>
+                     href="{% url 'detalhes_oferta' oferta.id %}"><i class="material-icons left">description</i>Detalhes</a>
                 </div>
 
             </div>

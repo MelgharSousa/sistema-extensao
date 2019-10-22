@@ -46,6 +46,16 @@ uf_opções = (
 	('TO','Tocantins'),
 )
 
+class TipoOferta(models.Model):
+	tipo_oferta = models.CharField('Tipo da Oferta', max_length=50)
+
+	class Meta:
+		verbose_name = 'Tipo da Oferta'
+		verbose_name_plural = 'Tipo de Oferta'
+
+	def __str__(self):
+		return self.tipo_oferta
+
 
 class Situacao(models.Model):
 	situacao = models.CharField('Situação', max_length=50)
@@ -117,45 +127,44 @@ class Participante(models.Model):
 		return self.nome
 
 
-class CursoExtensao(models.Model):
-	nome_curso = models.CharField('Nome do Curso', max_length=100)
-	resumo_curso = models.TextField('Resumo do Curso')
-	area_tematica = models.CharField('Área Temática', max_length=100)
+class Oferta(models.Model):
+	nome_oferta = models.CharField('Nome da Oferta', max_length=100)
+	resumo_oferta = models.TextField('Resumo da Oferta')
 	data_inicio = models.DateField('Período de Execução Inicial')
 	data_final = models.DateField('Período de Execução Final')
 	data_inscricoes_inicial = models.DateField('Período Inicial das Inscrições')
 	data_inscricoes_final = models.DateField('Período Final das Inscrições')
-	area_conhecimento = models.CharField('Área de Conhecimento',max_length=100)
-	tema = models.CharField('Tema', max_length=100)
-	possui_cunho_social = models.CharField('Possui Cunho Social',max_length=100)
+	area_conhecimento = models.CharField('Área de Conhecimento', max_length=100)
 	vagas_participantes = models.CharField('Vagas Participantes', max_length=5)
 	publico_alvo = models.CharField('Público Alvo', max_length=100)
 	carga_horaria = models.CharField('Carga Horária', max_length=10)
 	turno = models.CharField('Turno', max_length=20)
 	periodo_letivo = models.CharField('Ano Letivo', max_length=100)
 	equipe_participante = models.ManyToManyField(EquipeParticipante)
-	situacao = models.ForeignKey(Situacao,on_delete=models.PROTECT, default=1)
-	foto_curso = models.ImageField(default='default.png', blank=True, upload_to='media')
+	situacao = models.ForeignKey(Situacao, on_delete=models.PROTECT, default=1)
+	tipo_oferta = models.ForeignKey(TipoOferta, on_delete=models.PROTECT)
+	foto_oferta = models.ImageField(default='default.png', blank=True, upload_to='media')
 	criado = models.DateTimeField(auto_now_add=True)
 	modificado = models.DateTimeField(auto_now=True)
 
 	class Meta:
-		verbose_name_plural = 'Cursos'
+		verbose_name_plural = 'Ofertas'
 
 	def __str__(self):
-		return self.nome_curso
+		return self.nome_oferta
 
 
 class Arquivo(models.Model):
 	arquivo = models.FileField(upload_to='media', blank=True)
 	nome_arquivo = models.CharField("Nome do Arquivo", max_length=100)
 	descricao = models.TextField('Descrição do Arquivo')
-	curso = models.ForeignKey(CursoExtensao, related_name='arquivo', on_delete=models.PROTECT)
+	oferta = models.ForeignKey(Oferta, related_name='arquivo', on_delete=models.PROTECT)
 	criado = models.DateTimeField(auto_now_add=True)
 	modificado = models.DateTimeField(auto_now=True)
 
 	def __str__(self):
 		return self.nome_arquivo
+
 
 
 class SituacaoInscricao(models.Model):
@@ -169,7 +178,7 @@ class SituacaoInscricao(models.Model):
 		return self.situacao_inscricao
 
 class Inscricao(models.Model):
-	curso_extensao = models.ForeignKey(CursoExtensao, on_delete=models.PROTECT)
+	oferta = models.ForeignKey(Oferta, on_delete=models.PROTECT)
 	participante = models.ForeignKey(Participante, on_delete=models.PROTECT)
 	criado = models.DateTimeField(auto_now_add=True)
 	modificado = models.DateTimeField(auto_now=True)

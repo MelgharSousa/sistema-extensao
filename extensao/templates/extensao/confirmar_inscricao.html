@@ -9,12 +9,12 @@
             <div class="card hoverable">
                 <div class="card-content grey-text">
                     <span class="card-title center" id="nome-curso">CONFIRMAR PRÉ-INSCRIÇÃO</span>
-                    <p>Curso Selecionado: {{ curso.nome_curso }}</p>
+                    <p>Oferta Selecionada: {{ ofertas.nome_oferta }}</p>
                     <p>Nome do Candidato: {{ participante.nome }}</p>
                     <p>CPF: {{participante.cpf}}</p>
-                    <p>Data Início: {{ curso.data_inicio }}</p>
-                    <p>Data Final: {{ curso.data_final }}</p>
-                    <p>Carga horária: {{curso.carga_horaria}} Horas</p>
+                    <p>Data Início: {{ ofertas.data_inicio }}</p>
+                    <p>Data Final: {{ ofertas.data_final }}</p>
+                    <p>Carga horária: {{ ofertas.carga_horaria}} Horas</p>
                 </div>
 
             <div class="card-action center"></div>
@@ -24,7 +24,8 @@
 
     </div>
 
-    <h6 class="center">Concordo que a oferta deste curso está condicionada à formação de turmas. </h6>
+    <h6 class="center">Concordo que a confirmação desta inscrição está condicionada
+        a apresentação dos documentos solicitados no edital. </h6>
 
 
     <div class="switch center">
@@ -43,7 +44,7 @@
             </div>
 
             <div class="col l3 m3 s12 ">
-                <form action="{% url 'inscricao_save' curso.id %}" method="post">
+                <form action="{% url 'inscricao_save' ofertas.id %}" method="post">
                     {% csrf_token %}
 
                     <button id="avancar" type="submit" disabled="disabled"  class="btn-home waves-effect waves-light btn

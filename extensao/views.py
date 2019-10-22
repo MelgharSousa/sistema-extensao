@@ -3,48 +3,67 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm, PasswordResetForm
-from .models import Participante, CursoExtensao, Inscricao, Situacao
+from .models import Participante, Oferta, Inscricao, Situacao, TipoOferta
 from .forms import ParticipanteForm, EditarParticipanteForm
 from django.contrib import messages
 
-
 # view da página home
 def home(request):
-    cursos = CursoExtensao.objects.all()
-    return render(request, 'extensao/home.html', {'cursos': cursos})
+    ofertas = Oferta.objects.all()
+    return render(request, 'extensao/home.html', {'ofertas': ofertas})
+
+
+def categoria(request):
+    p = {'1', '2'}
+    tipo_oferta = request.GET.get('cat')
+    if tipo_oferta in p:
+        ofertas = Oferta.objects.filter(tipo_oferta=int(tipo_oferta))
+    else:
+        ofertas = Oferta.objects.all()
+
+    context = {'ofertas': ofertas}
+    return render(request, 'extensao/home.html', context)
+
+
+
+def novos_cursos(request):
+    situacao = Situacao.objects.get(id=1)
+    ofertas = Oferta.objects.filter(situacao=situacao)
+    return render(request, 'extensao/novos_cursos.html', {'ofertas': ofertas})
 
 
 # View Categoria de Cursos
 def novos_cursos(request):
     situacao = Situacao.objects.get(id=1)
-    cursos = CursoExtensao.objects.filter(situacao=situacao)
-    return render(request, 'extensao/novos_cursos.html', {'cursos': cursos})
+    ofertas = Oferta.objects.filter(situacao=situacao)
+    return render(request, 'extensao/novos_cursos.html', {'ofertas': ofertas})
 
 
 def inscricoes_abertas(request):
     situacao = Situacao.objects.get(id=2)
-    cursos = CursoExtensao.objects.filter(situacao=situacao)
+    ofertas = Oferta.objects.filter(situacao=situacao)
     return render(request, 'extensao/inscricoes_abertas.html',
-    {'cursos': cursos})
+    {'ofertas': ofertas})
 
 
 def inscricoes_finalizadas(request):
     situacao = Situacao.objects.get(id=3)
-    cursos = CursoExtensao.objects.filter(situacao=situacao)
+    ofertas = Oferta.objects.filter(situacao=situacao)
     return render(request, 'extensao/inscricoes_finalizadas.html',
-    {'cursos': cursos})
+    {'ofertas': ofertas})
+
 
 def concluidos(request):
     situacao = Situacao.objects.get(id=4)
-    cursos = CursoExtensao.objects.filter(situacao=situacao)
-    return render(request, 'extensao/concluidos.html', {'cursos': cursos})
+    ofertas = Oferta.objects.filter(situacao=situacao)
+    return render(request, 'extensao/concluidos.html', {'ofertas': ofertas})
 
 
 #View Detalhes do Curso
-def detalhes_curso(request, id):
-    curso = CursoExtensao.objects.get(pk=id)
-    context = {'curso': curso}
-    return render(request, 'extensao/detalhes_curso.html', context)
+def detalhes_oferta(request, id):
+    oferta = Oferta.objects.get(id=id)
+    context = {'oferta': oferta}
+    return render(request, 'extensao/detalhes_oferta.html', context)
 
 
 #View Cadastrar Usuário
@@ -53,13 +72,13 @@ def signup(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Cadastro Realizado com Sucesso!', extra_tags='login')
+            messages.success(request, 'Cadastro Realizado com Sucesso!'
+            , extra_tags='login')
             return redirect('login')
     else:
         form = UserCreationForm()
 
     return render(request, 'registration/signup.html', {'form': form})
-
 
 
 #View Alterar Senha
@@ -239,13 +258,13 @@ def minhas_inscricoes(request):
         else:
             messages.warning(request, 'Você não está inscrito em nenhum curso! Selecione um curso!',
             extra_tags='inscricao3')
-            return render(request, 'extensao/detalhes_curso.html', context)
+            return render(request, 'extensao/detalhes_oferta.html', context)
     else:
         messages.warning(request, 'Realize seu cadastro Aqui!', extra_tags='editado')
         return redirect('home')
 
 
-  # View Gerar Comprovante (Exibi o comprovante de cada inscrição realizada pelo Participante)
+# View Gerar Comprovante (Exibi o comprovante de cada inscrição realizada pelo Participante)
 def gerar_comprovante(request, id):
     inscricao = Inscricao.objects.get(pk=id)
     context = {'inscricao': inscricao}
@@ -266,39 +285,39 @@ def comprovante_inscricao(request, id):
 # View Inscrição (Grava os dados na tabela Inscrição)
 def inscricao_save(request, id):
         usuario = User.objects.get(username=request.user)
-        curso = CursoExtensao.objects.get(pk=id)
-        context = {'curso': curso}
+        ofertas = Oferta.objects.get(pk=id)
+        context = {'ofertas': ofertas}
         participante = Participante.objects.get(usuario=usuario)
-        curso_extensao = CursoExtensao.objects.get(pk=id)
-        inscricao = Inscricao(participante=participante, curso_extensao=curso_extensao)
+        oferta = Oferta.objects.get(pk=id)
+        inscricao = Inscricao(participante=participante, oferta=oferta)
         inscricao_check = Inscricao.objects.filter(participante_id=participante.id,
-        curso_extensao_id=curso_extensao.id)
+        oferta_id=oferta.id)
         if not inscricao_check.exists():
             inscricao.save()
             return redirect('gerar_comprovante', inscricao.id)
         else:
             messages.warning(request, 'Você já está inscrito nesse curso!',
             extra_tags='inscricao_save')
-            return render(request, 'extensao/detalhes_curso.html', context)
+            return render(request, 'extensao/detalhes_oferta.html', context)
 
 
  # View Confirmar Inscrição (Relaciona os Objetos Participante e Curso na tabela Inscrição do BD)
 def confirmar_inscricao(request, id):
     usuario = User.objects.get(username=request.user)
     if participante_check(id=usuario.id):
-        curso = CursoExtensao.objects.get(pk=id)
+        ofertas = Oferta.objects.get(pk=id)
         participante = Participante.objects.get(usuario=usuario)
-        curso_extensao = CursoExtensao.objects.get(pk=id)
-        inscricao_check = Inscricao.objects.filter(participante_id=participante.id, curso_extensao_id=curso_extensao.id)
-        context = {'curso': curso, 'participante': participante}
+        oferta = Oferta.objects.get(pk=id)
+        inscricao_check = Inscricao.objects.filter(participante_id=participante.id, oferta_id=oferta.id)
+        context = {'ofertas': ofertas, 'participante': participante}
         if not inscricao_check.exists():
             return render(request, 'extensao/confirmar_inscricao.html', context)
         else:
             messages.warning(request, 'Você já está inscrito nesse curso!',
             extra_tags='inscricao1')
 
-        return redirect('detalhes_curso', id=id)
+        return redirect('detalhes_oferta', id=id)
     else:
         messages.warning(request, ' Seu cadastro ainda não está completo! Clique aqui para concluir cadastro.',
         extra_tags='inscricao2')
-    return redirect('detalhes_curso', id=id)
+    return redirect('detalhes_oferta', id=id)
