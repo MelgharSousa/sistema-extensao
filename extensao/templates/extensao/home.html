@@ -41,14 +41,14 @@
         <form method="get" action="{% url 'categoria' %}">
 
             <div class="col l2 s8 m6 offset-l9 offset-m4">
-                <select name="cat" class="browser-default green darken-4 white-text center">
+                <select name="cat" class="browser-default green darken-4 white-text center" >
                     <option value="">Ofertas</option>
                     <option value="1">Cursos de Extensão</option>
                     <option value="2">Monitoria</option>
                 </select>
             </div>
             <div class="col l1 s4 m2">
-                 <button class="btn waves-effect waves-light green darken-4 btn-filtro center"  type="submit">Filtrar</button>
+                 <button class="btn waves-effect waves-light green darken-4 btn-filtro center" type="submit">Filtrar</button>
             </div>
         </form>
     </div>
@@ -84,6 +84,13 @@
         {% endfor %}
 
     </div>
+
+    <script>
+        function validaOption(valor){
+            alert('Aqui' + valor);
+
+        }
+    </script>
 
 
 

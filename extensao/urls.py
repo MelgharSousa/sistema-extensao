@@ -18,7 +18,7 @@ urlpatterns = [
     path('inscricoes_finalizadas', views.inscricoes_finalizadas,
          name='inscricoes_finalizadas'),
     path('concluidos', views.concluidos, name='concluidos'),
-    path('categoria', views.categoria, name='categoria'),
+    path('categoria/', views.categoria, name='categoria'),
 
 
     #View Detalhes do Curso
