@@ -6,6 +6,10 @@ from django.contrib.auth.forms import PasswordChangeForm, PasswordResetForm
 from .models import Participante, Oferta, Inscricao, Situacao, TipoOferta
 from .forms import ParticipanteForm, EditarParticipanteForm
 from django.contrib import messages
+import re
+from django.core.exceptions import ValidationError
+from django.utils.translation import ugettext_lazy as _
+
 
 # view da página home
 def home(request):
@@ -24,12 +28,6 @@ def categoria(request):
     context = {'ofertas': ofertas}
     return render(request, 'extensao/home.html', context)
 
-
-
-def novos_cursos(request):
-    situacao = Situacao.objects.get(id=1)
-    ofertas = Oferta.objects.filter(situacao=situacao)
-    return render(request, 'extensao/novos_cursos.html', {'ofertas': ofertas})
 
 
 # View Categoria de Cursos
@@ -132,7 +130,7 @@ def participante(request):
     return render(request, 'extensao/cadastro.html', data)
 
 
-#View Participante Save (Grava os dados no formulário no BD)
+#View Participante Save (Grava os dados do formulário no BD)
 def participante_save(request):
     form = ParticipanteForm(request.POST, request.FILES or None)
     usuario = User.objects.get(username=request.user)
@@ -184,13 +182,17 @@ def participante_save(request):
             return redirect('home')
         else:
             participante_cpf = Participante.objects.filter(cpf=cpf)
+           # participante_nome = Participante.objects.filter(nome=nome)
+            #x = re.findall("[A-Z]")
             if not participante_cpf.exists():
+                #and participante_nome == x:
                 participante.save()
-                messages.success(request, 'Pronto para realizar inscrição! Selecione um curso!',
+                messages.success(request, 'Pronto para realizar inscrição! Selecione um curso.',
                                  extra_tags='cadastrado')
                 return redirect('home')
             else:
-                messages.success(request, 'Existe outro Usuário com esse cpf!', extra_tags='cpf')
+                messages.success(request, 'Existe outro Usuário com esse CPF!', extra_tags='cpf')
+                #messages.success(request, 'Campo Inválido! Use apenas letras maiúsculas', extra_tags='nome')
             return render(request, 'extensao/cadastro.html', {'form': form})
 
 
@@ -205,7 +207,7 @@ def editar(request):
 
        if form.is_valid():
             form.save()
-            messages.warning(request, 'Alterado com sucesso! Voltar para a página inicial',
+            messages.warning(request, 'Alterado com sucesso! Voltar para a página inicial.',
             extra_tags='editado10')
 
 
@@ -234,7 +236,7 @@ def participante_detalhes(request):
         return redirect('home')
 
 
-# View Verifica Participante (Verifica se o Usuário autentificado no sistema possui Participante ou seja, está cadastro)
+# View Verifica Participante (Verifica se o Usuário autentificado no sistema possui Participante ou seja, está cadastrado)
 def participante_check(id):
     usuario = User.objects.get(pk=id)
     participante = Participante.objects.filter(usuario=usuario).first()
@@ -256,7 +258,7 @@ def minhas_inscricoes(request):
         if inscricoes.exists():
             return render(request, 'extensao/minhas_inscricoes.html', context)
         else:
-            messages.warning(request, 'Você não está inscrito em nenhum curso! Selecione um curso!',
+            messages.warning(request, 'Você não está inscrito em nenhum curso! Selecione um curso.',
             extra_tags='inscricao3')
             return render(request, 'extensao/detalhes_oferta.html', context)
     else:

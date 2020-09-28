@@ -54,6 +54,13 @@
                         <label for="id_cpf"><span>*</span>CPF</label>
                          {{ form.cpf }}
                     </div>
+
+                        {% for message in messages %}
+                                {% if "nome" in message.tags %}
+                            <p id="alert-nome" class="{{ message.tags }}"> {{ message }}</p>
+                                {% endif %}
+                        {% endfor %}
+
                     <div class="campo">
                         <label for="id_nome"><span>*</span>Nome Completo</label>
                         {{ form.nome }}
